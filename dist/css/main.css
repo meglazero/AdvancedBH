@@ -84,7 +84,7 @@ body .links ul li {
 body #fusions {
   margin: 10px auto;
   padding: 5px;
-  width: 90%;
+  width: 100%;
 }
 
 body #fusions #fusionTable {
@@ -95,6 +95,7 @@ body #fusions #fusionTable {
   display: grid;
   -ms-grid-columns: 50px 3fr 18px 5% 10% 10% 10% 10% 10% 10%;
       grid-template-columns: 50px 3fr 18px 5% 10% 10% 10% 10% 10% 10%;
+  min-width: 1000px;
 }
 
 body #fusions #fusionTable #fusionImage {
@@ -163,5 +164,11 @@ body #fusions #fusionTable:last-child {
   body .links ul li {
     margin: 10px;
     height: 2vh;
+  }
+}
+
+@media (min-width: 1040px) {
+  body #fusions {
+    width: 90%;
   }
 }

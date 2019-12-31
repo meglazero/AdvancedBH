@@ -73,7 +73,7 @@ body{
     #fusions{
         margin: 10px auto;
         padding: 5px;
-        width: 90%;
+        width: 100%;
         
         #fusionTable{
             width: 100%;
@@ -81,6 +81,7 @@ body{
             border-bottom: 0px;
             display: grid;
             grid-template-columns: 50px 3fr 18px 5% 10% 10% 10% 10% 10% 10%;
+            min-width: 1000px;
         
             #fusionImage{
                 background-repeat: no-repeat;
@@ -150,6 +151,15 @@ body{
                     height: 2vh;
                 }
             }
+        }
+    }
+}
+
+@media(min-width: 1040px){
+    body{
+
+        #fusions{
+            width: 90%;
         }
     }
 }

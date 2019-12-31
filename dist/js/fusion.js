@@ -3,7 +3,7 @@ const target = 'Damage target';
 const closest2 = 'Damage closest 2';
 const furthest = 'Damage furthest 2';
 const drainclose = 'Drain closest';
-const weakest = 'Ddamage weakest';
+const weakest = 'Damage weakest';
 
 const fusionTemplate = document.querySelector('#fusionTemplate');
 const fusionTable = document.querySelector('#fusions');
