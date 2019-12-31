@@ -86,63 +86,44 @@ body{
                 background-repeat: no-repeat;
                 background-position: center;
                 grid-row: 1 / 4;
-                grid-column: 1;
-            }
-
-            #fusionName, #atkImage, #atkValue, #skill1, #skill2, #skill3, #skill4, #skill5, #skill6 {
-                grid-row: 1;
-            }
-
-            #bonusStat, #hpImage, #hpValue, #target1, #target2, #target3, #target4, #target5, #target6 {
-                grid-row: 2;
-            }
-
-            #fusionFams, #agiImage, #agiValue, #damage1, #damage2, #damage3, #damage4, #damage5, #damage6 {
-                grid-row: 3;
             }
 
             #fusionName, #bonusStat, #fusionFams{
                 text-align: center;
                 word-wrap: normal;
-                grid-column: 2;
             }
 
             #atkImage, #hpImage, #agiImage{
-                grid-column: 3;
+                background-repeat: no-repeat;
+                background-position: center;
             }
 
             #atkValue, #hpValue, #agiValue{
-                grid-column: 4;
+                text-align: center;
             }
 
             #skill1, #target1, #damage1{
                 text-align: center;
-                grid-column: 5;
             }
 
             #skill2, #target2, #damage2{
                 text-align: center;
-                grid-column: 6;
             }
 
             #skill3, #target3, #damage3{
                 text-align: center;
-                grid-column: 7;
             }
 
             #skill4, #target4, #damage4{
                 text-align: center;
-                grid-column: 8;
             }
 
             #skill5, #target5, #damage5{
                 text-align: center;
-                grid-column: 9;
             }
 
             #skill6, #target6, #damage6{
                 text-align: center;
-                grid-column: 10;
             }
         }
 

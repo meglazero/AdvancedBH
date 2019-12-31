@@ -103,76 +103,44 @@ body #fusions #fusionTable #fusionImage {
   -ms-grid-row: 1;
   -ms-grid-row-span: 3;
   grid-row: 1 / 4;
-  -ms-grid-column: 1;
-  grid-column: 1;
-}
-
-body #fusions #fusionTable #fusionName, body #fusions #fusionTable #atkImage, body #fusions #fusionTable #atkValue, body #fusions #fusionTable #skill1, body #fusions #fusionTable #skill2, body #fusions #fusionTable #skill3, body #fusions #fusionTable #skill4, body #fusions #fusionTable #skill5, body #fusions #fusionTable #skill6 {
-  -ms-grid-row: 1;
-  grid-row: 1;
-}
-
-body #fusions #fusionTable #bonusStat, body #fusions #fusionTable #hpImage, body #fusions #fusionTable #hpValue, body #fusions #fusionTable #target1, body #fusions #fusionTable #target2, body #fusions #fusionTable #target3, body #fusions #fusionTable #target4, body #fusions #fusionTable #target5, body #fusions #fusionTable #target6 {
-  -ms-grid-row: 2;
-  grid-row: 2;
-}
-
-body #fusions #fusionTable #fusionFams, body #fusions #fusionTable #agiImage, body #fusions #fusionTable #agiValue, body #fusions #fusionTable #damage1, body #fusions #fusionTable #damage2, body #fusions #fusionTable #damage3, body #fusions #fusionTable #damage4, body #fusions #fusionTable #damage5, body #fusions #fusionTable #damage6 {
-  -ms-grid-row: 3;
-  grid-row: 3;
 }
 
 body #fusions #fusionTable #fusionName, body #fusions #fusionTable #bonusStat, body #fusions #fusionTable #fusionFams {
   text-align: center;
   word-wrap: normal;
-  -ms-grid-column: 2;
-  grid-column: 2;
 }
 
 body #fusions #fusionTable #atkImage, body #fusions #fusionTable #hpImage, body #fusions #fusionTable #agiImage {
-  -ms-grid-column: 3;
-  grid-column: 3;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 body #fusions #fusionTable #atkValue, body #fusions #fusionTable #hpValue, body #fusions #fusionTable #agiValue {
-  -ms-grid-column: 4;
-  grid-column: 4;
+  text-align: center;
 }
 
 body #fusions #fusionTable #skill1, body #fusions #fusionTable #target1, body #fusions #fusionTable #damage1 {
   text-align: center;
-  -ms-grid-column: 5;
-  grid-column: 5;
 }
 
 body #fusions #fusionTable #skill2, body #fusions #fusionTable #target2, body #fusions #fusionTable #damage2 {
   text-align: center;
-  -ms-grid-column: 6;
-  grid-column: 6;
 }
 
 body #fusions #fusionTable #skill3, body #fusions #fusionTable #target3, body #fusions #fusionTable #damage3 {
   text-align: center;
-  -ms-grid-column: 7;
-  grid-column: 7;
 }
 
 body #fusions #fusionTable #skill4, body #fusions #fusionTable #target4, body #fusions #fusionTable #damage4 {
   text-align: center;
-  -ms-grid-column: 8;
-  grid-column: 8;
 }
 
 body #fusions #fusionTable #skill5, body #fusions #fusionTable #target5, body #fusions #fusionTable #damage5 {
   text-align: center;
-  -ms-grid-column: 9;
-  grid-column: 9;
 }
 
 body #fusions #fusionTable #skill6, body #fusions #fusionTable #target6, body #fusions #fusionTable #damage6 {
   text-align: center;
-  -ms-grid-column: 10;
-  grid-column: 10;
 }
 
 body #fusions #fusionTable:last-child {
