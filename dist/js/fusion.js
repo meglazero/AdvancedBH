@@ -3,6 +3,7 @@ const target = 'Damage target';
 const closest2 = 'Damage closest 2';
 const furthest = 'Damage furthest 2';
 const drainclose = 'Drain closest';
+const weakest = 'Ddamage weakest';
 
 const fusionTemplate = document.querySelector('#fusionTemplate');
 const fusionTable = document.querySelector('#fusions');
@@ -40,10 +41,39 @@ const fusions = [
         dam2: '80-120%',
         rarity: 'common',
     },
+    {
+        image: 'url("/dist/imgs/rombolio.png")',
+        name: 'Rombolio',
+        bonus: '30% Evade Chance, 15% Redirect Chance',
+        fusedFams: 'Bobodom + Olxaroth + Capt. Wombomz',
+        atk: '31.7%',
+        hp: '41.7%',
+        agi: '26.6%',
+        atk1: 'Attack (0 SP)',
+        tar1: closest,
+        dam1: '90-110%',
+        atk2: 'Slam (1 SP)',
+        tar2: closest,
+        dam2: '103.2-240.8%',
+        atk3: 'Chomp (1 SP)',
+        tar3: weakest,
+        dam3: '85.2-198.8%',
+        atk4: 'Feast (1 SP)',
+        tar4: drainclose,
+        dam4: '45-105%',
+        atk5: 'Inspire (2 SP)',
+        tar5: 'Spread heal',
+        dam5: '72-168%',
+        atk6: 'Gnaw (2 SP)',
+        tar6: target,
+        dam6: '108-252%',
+        rarity: 'mythic',
+    },
 ];
 
 function genFusions(element) {
     const fusionElement = document.importNode(fusionTemplate.content, true);
+    const fusionGroup = fusionElement.querySelector('#fusionTable');
     const fusionImage = fusionElement.querySelector('#fusionImage');
     // fusionImage.textContent = "";
     fusionImage.style.backgroundImage = element.image;
@@ -130,10 +160,18 @@ function genFusions(element) {
     const damage6 = fusionElement.querySelector('#damage6');
     damage6.textContent = element.dam6;
 
-
-    // fusions.forEach(element => {
+    if (element.rarity == 'common') {
+        fusionGroup.style.backgroundColor = '#97FF7D';
+    } else if (element.rarity == 'rare') {
+        fusionGroup.style.backgroundColor = '#939EF4';
+    } else if (element.rarity == 'epic') {
+        fusionGroup.style.backgroundColor = '#FF807D';
+    } else if (element.rarity == 'legendary') {
+        fusionGroup.style.backgroundColor = '#FFFF00';
+    } else if (element.rarity == 'mythic') {
+        fusionGroup.style.backgroundColor = '#FF00AE';
+    }
     fusionTable.appendChild(fusionElement);
-    // });
 }
 
 fusions.forEach(element => {
