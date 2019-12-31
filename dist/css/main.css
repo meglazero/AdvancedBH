@@ -18,6 +18,10 @@ a:hover {
   cursor: cell;
 }
 
+body {
+  background-color: #aaaaaa;
+}
+
 body #mainHeader ul {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
