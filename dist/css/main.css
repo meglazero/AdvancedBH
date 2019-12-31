@@ -89,8 +89,18 @@ body .links ul li {
   width: auto;
 }
 
-body .fusions .fusionImage {
+body #fusions #fusionTable {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body #fusions #fusionTable #fusionImage {
   background-image: "";
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50px;
 }
 
 @media (max-width: 800px) {

@@ -82,9 +82,22 @@ body{
         }
     }
 
-    .fusions .fusionImage{
-        background-image: "";
-    }
+    #fusions{
+        
+        #fusionTable{
+            width: 100%;
+            display: flex;
+            
+    
+            #fusionImage{
+                background-image: "";
+                // background: rgba(50, 180, 141, 0.3)
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 50px;
+            }
+        }
+    }   
 
 }
 

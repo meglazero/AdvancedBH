@@ -9,7 +9,7 @@ const fusionTable = document.querySelector('#fusions');
 
 const fusions = [
     {
-        image: "/dist/imgs/prof-gak.png",
+        image: 'url("/dist/imgs/prof-gak.png")',
         name: 'Prof. Gak',
         bonus: '7.5% Health',
         fusedFams: 'Gak + Prof. Oak',
@@ -25,7 +25,7 @@ const fusions = [
         rarity: 'common',
     },
     {
-        image: "/dist/imgs/booty.png",
+        image: 'url("/dist/imgs/booty.png")',
         name: 'Booty',
         bonus: '7.5% Life Steal',
         fusedFams: 'BooBoo + Batty',
