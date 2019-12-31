@@ -79,58 +79,70 @@ body{
             width: 100%;
             border: 1px solid black;
             border-bottom: 0px;
+            display: grid;
+            grid-template-columns: 50px 3fr 18px 5% 10% 10% 10% 10% 10% 10%;
         
             #fusionImage{
-                // background: rgba(50, 180, 141, 0.3);
                 background-repeat: no-repeat;
                 background-position: center;
-                width: 50px;
-                min-width: 50px;
+                grid-row: 1 / 4;
+                grid-column: 1;
+            }
+
+            #fusionName, #atkImage, #atkValue, #skill1, #skill2, #skill3, #skill4, #skill5, #skill6 {
+                grid-row: 1;
+            }
+
+            #bonusStat, #hpImage, #hpValue, #target1, #target2, #target3, #target4, #target5, #target6 {
+                grid-row: 2;
+            }
+
+            #fusionFams, #agiImage, #agiValue, #damage1, #damage2, #damage3, #damage4, #damage5, #damage6 {
+                grid-row: 3;
             }
 
             #fusionName, #bonusStat, #fusionFams{
-                width: auto;
-                // max-width: 75px;
                 text-align: center;
                 word-wrap: normal;
+                grid-column: 2;
             }
 
             #atkImage, #hpImage, #agiImage{
-                width: 18px;
+                grid-column: 3;
             }
 
             #atkValue, #hpValue, #agiValue{
-                width: 5%;
+                grid-column: 4;
             }
 
             #skill1, #target1, #damage1{
-                width: 10%;
                 text-align: center;
+                grid-column: 5;
             }
 
             #skill2, #target2, #damage2{
-                width: 10%;
                 text-align: center;
+                grid-column: 6;
             }
 
             #skill3, #target3, #damage3{
-                width: 10%;
                 text-align: center;
+                grid-column: 7;
             }
 
             #skill4, #target4, #damage4{
-                width: 10%;
                 text-align: center;
+                grid-column: 8;
             }
 
             #skill5, #target5, #damage5{
-                width: 10%;
                 text-align: center;
+                grid-column: 9;
             }
 
             #skill6, #target6, #damage6{
-                width: 10%;
                 text-align: center;
+                grid-column: 10;
             }
         }
 
