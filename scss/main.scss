@@ -30,7 +30,7 @@ body{
             margin: 20px;
 
             li{
-                flex-basis: 25%;
+                flex: 1;
                 text-align: center;
             }
         }
@@ -80,8 +80,9 @@ body{
             border: 1px solid black;
             border-bottom: 0px;
             display: grid;
-            grid-template-columns: 50px 3fr 18px 5% 10% 10% 10% 10% 10% 10%;
+            grid-template-columns: 50px auto 18px 5% 10% 10% 10% 10% 10% 10%;
             min-width: 1000px;
+            padding: 7px 5px;
         
             #fusionImage{
                 background-repeat: no-repeat;

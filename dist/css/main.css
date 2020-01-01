@@ -37,8 +37,9 @@ body #mainHeader ul {
 }
 
 body #mainHeader ul li {
-  -ms-flex-preferred-size: 25%;
-      flex-basis: 25%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   text-align: center;
 }
 
@@ -93,9 +94,10 @@ body #fusions #fusionTable {
   border-bottom: 0px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 50px 3fr 18px 5% 10% 10% 10% 10% 10% 10%;
-      grid-template-columns: 50px 3fr 18px 5% 10% 10% 10% 10% 10% 10%;
+  -ms-grid-columns: 50px auto 18px 5% 10% 10% 10% 10% 10% 10%;
+      grid-template-columns: 50px auto 18px 5% 10% 10% 10% 10% 10% 10%;
   min-width: 1000px;
+  padding: 7px 5px;
 }
 
 body #fusions #fusionTable #fusionImage {
