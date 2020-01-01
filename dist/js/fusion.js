@@ -1,3 +1,4 @@
+//damage/heal targets for individual attacks
 const closest = 'Damage closest';
 const target = 'Damage target';
 const closest2 = 'Damage closest 2';
@@ -6,23 +7,37 @@ const drainclose = 'Drain closest';
 const weakest = 'Damage weakest';
 const all = 'Damage all';
 const healt = 'Heal target';
+//
 
+//sets up template and table to output information to from fusions objects
 const fusionTemplate = document.querySelector('#fusionTemplate');
 const fusionTable = document.querySelector('#fusions');
 
+//pulls all the relevant info, places in correct div, and pushes a child out to parent
 function genFusions(element) {
+    //imports template from fusion.html
     const fusionElement = document.importNode(fusionTemplate.content, true);
+
+    //selects entire fusion group info and updates color based on fusion rarity
     const fusionGroup = fusionElement.querySelector('#fusionTable');
+    if (element.rarity == 'common') {
+        fusionGroup.style.backgroundColor = '#97FF7D';
+    } else if (element.rarity == 'rare') {
+        fusionGroup.style.backgroundColor = '#939EF4';
+    } else if (element.rarity == 'epic') {
+        fusionGroup.style.backgroundColor = '#FF807D';
+    } else if (element.rarity == 'legendary') {
+        fusionGroup.style.backgroundColor = '#FFFF00';
+    } else if (element.rarity == 'mythic') {
+        fusionGroup.style.backgroundColor = '#FF00AE';
+    }
+
+    //from here to appendchild pulls individual div targets and places info from fusion object
     const fusionImage = fusionElement.querySelector('#fusionImage');
-    // fusionImage.textContent = "";
     fusionImage.style.backgroundImage = element.image;
-    console.log(fusionImage);
 
     const fusionName = fusionElement.querySelector('#fusionName');
     fusionName.textContent = element.name;
-
-    // const atkImage = document.querySelector('#atkImage');
-    // target1.textContent = element.tar1;
 
     const atkValue = fusionElement.querySelector('#atkValue');
     atkValue.textContent = element.atk;
@@ -48,9 +63,6 @@ function genFusions(element) {
     const bonusStat = fusionElement.querySelector('#bonusStat');
     bonusStat.textContent = element.bonus;
 
-    // const hpImage = document.querySelector('#hpImage');
-    // target1.textContent = element.tar1;
-
     const hpValue = fusionElement.querySelector('#hpValue');
     hpValue.textContent = element.hp;
 
@@ -75,9 +87,6 @@ function genFusions(element) {
     const fusionFams = fusionElement.querySelector('#fusionFams');
     fusionFams.textContent = element.fusedFams;
 
-    // const agiImage = document.querySelector('#agiImage');
-    // target1.textContent = element.tar1;
-
     const agiValue = fusionElement.querySelector('#agiValue');
     agiValue.textContent = element.agi;
 
@@ -99,20 +108,11 @@ function genFusions(element) {
     const damage6 = fusionElement.querySelector('#damage6');
     damage6.textContent = element.dam6;
 
-    if (element.rarity == 'common') {
-        fusionGroup.style.backgroundColor = '#97FF7D';
-    } else if (element.rarity == 'rare') {
-        fusionGroup.style.backgroundColor = '#939EF4';
-    } else if (element.rarity == 'epic') {
-        fusionGroup.style.backgroundColor = '#FF807D';
-    } else if (element.rarity == 'legendary') {
-        fusionGroup.style.backgroundColor = '#FFFF00';
-    } else if (element.rarity == 'mythic') {
-        fusionGroup.style.backgroundColor = '#FF00AE';
-    }
+    //adds template as child into html under #fusions id
     fusionTable.appendChild(fusionElement);
 }
 
+//full list of fusions
 const fusions = [
     {
         //------------- COMMONS DUNGEON -------------//
@@ -449,6 +449,7 @@ const fusions = [
     },
 ];
 
+//onload runs through each fusion and loads the table of all fusions in array
 fusions.forEach(element => {
     genFusions(element);
 });
