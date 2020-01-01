@@ -118,7 +118,7 @@ const fusions = [
         //------------- COMMONS DUNGEON -------------//
 
 
-        image: 'url("/dist/imgs/prof-gak.png")',
+        image: 'url("dist/imgs/prof-gak.png")',
         name: 'Prof. Gak',
         bonus: '7.5% Health',
         fusedFams: 'Gak + Prof. Oak',
@@ -136,7 +136,7 @@ const fusions = [
         specSource: 'Z2D2, Z1D2',
     },
     {
-        image: 'url("/dist/imgs/booty.png")',
+        image: 'url("dist/imgs/booty.png")',
         name: 'Booty',
         bonus: '7.5% Life Steal',
         fusedFams: 'BooBoo + Batty',
@@ -154,7 +154,7 @@ const fusions = [
         specSource: 'Z1D1, Z1D1',
     },
     {
-        image: 'url("/dist/imgs/narchie.png")',
+        image: 'url("dist/imgs/narchie.png")',
         name: 'Narchie',
         bonus: '7.5% Speed',
         fusedFams: 'Archie + Naginee',
@@ -172,7 +172,7 @@ const fusions = [
         specSource: 'Z2D3, Z3D1',
     },
     {
-        image: 'url("/dist/imgs/jugg.png")',
+        image: 'url("dist/imgs/jugg.png")',
         name: 'Jugg',
         bonus: '15% Crit Chance',
         fusedFams: 'Sugg + Juice',
@@ -190,7 +190,7 @@ const fusions = [
         specSource: 'Z2D2, Z3D3',
     },
     {
-        image: 'url("/dist/imgs/krives.png")',
+        image: 'url("dist/imgs/krives.png")',
         name: 'Krives',
         bonus: '7.5% Damage',
         fusedFams: 'Krusty + Ives',
@@ -208,7 +208,7 @@ const fusions = [
         specSource: 'Z1D3, Z3D1',
     },
     {
-        image: 'url("/dist/imgs/naukmo.png")',
+        image: 'url("dist/imgs/naukmo.png")',
         name: 'Naukmo',
         bonus: '7.5% Evade Chance',
         fusedFams: 'Baumo + Nock',
@@ -226,7 +226,7 @@ const fusions = [
         specSource: 'Z2D1, Z3D3',
     },
     {
-        image: 'url("/dist/imgs/esskelegro.png")',
+        image: 'url("dist/imgs/esskelegro.png")',
         name: "Es'Skelegro",
         bonus: '7.5% Damage Enrage',
         fusedFams: "Es'Skeleto + 2 Jumbo Syrum",
@@ -244,7 +244,7 @@ const fusions = [
         specSource: 'Z1D3',
     },
     {
-        image: 'url("/dist/imgs/grolum.png")',
+        image: 'url("dist/imgs/grolum.png")',
         name: 'Grolum',
         bonus: '15% Crit Chance',
         fusedFams: 'Golum + 2 Jumbo Syrum',
@@ -262,7 +262,7 @@ const fusions = [
         specSource: 'Z4D3',
     },
     {
-        image: 'url("/dist/imgs/zammy.png")',
+        image: 'url("dist/imgs/zammy.png")',
         name: 'Zammy',
         bonus: '7.5% Speed',
         fusedFams: 'Sammy + 2 Mini Syrum',
@@ -280,7 +280,7 @@ const fusions = [
         specSource: 'Z4D2',
     },
     {
-        image: 'url("/dist/imgs/saerugg.png")',
+        image: 'url("dist/imgs/saerugg.png")',
         name: 'Saerugg',
         bonus: '15% Block Chance',
         fusedFams: 'Saerebrum + Uggs',
@@ -298,7 +298,7 @@ const fusions = [
         specSource: 'Z4D2, Z4D1',
     },
     {
-        image: 'url("/dist/imgs/asst-oak.png")',
+        image: 'url("dist/imgs/asst-oak.png")',
         name: 'Asst. Oak',
         bonus: '4.5% Deflect Chance',
         fusedFams: 'Prof. Oak + 2 Mini Syrum',
@@ -316,7 +316,7 @@ const fusions = [
         specSource: 'Z1D2',
     },
     {
-        image: 'url("/dist/imgs/immyt.png")',
+        image: 'url("dist/imgs/immyt.png")',
         name: 'Immyt',
         bonus: '7.5% Evade Chance',
         fusedFams: 'Emmyt + 2 Mini Syrum',
@@ -334,7 +334,7 @@ const fusions = [
         specSource: 'Z5D1',
     },
     {
-        image: 'url("/dist/imgs/bummih.png")',
+        image: 'url("dist/imgs/bummih.png")',
         name: 'Bummih',
         bonus: '7.5% Dual Strike',
         fusedFams: 'Mummih + 2 Jumbo Syrum',
@@ -352,7 +352,7 @@ const fusions = [
         specSource: 'Z5D3',
     },
     {
-        image: 'url("/dist/imgs/vickoo.png")',
+        image: 'url("dist/imgs/vickoo.png")',
         name: 'Vickoo',
         bonus: '7.5% Dual Strike',
         fusedFams: 'BooBoo + Vicky',
@@ -370,7 +370,7 @@ const fusions = [
         specSource: 'Z1D1, Z7D1',
     },
     {
-        image: 'url("/dist/imgs/saerebrumark.png")',
+        image: 'url("dist/imgs/saerebrumark.png")',
         name: 'Saerebrumark',
         bonus: '7.5% Evade Chance',
         fusedFams: 'Saerebrum + Samark',
@@ -388,7 +388,7 @@ const fusions = [
         specSource: 'Z4D2, Z10D2',
     },
     {
-        image: 'url("/dist/imgs/gorce.png")',
+        image: 'url("dist/imgs/gorce.png")',
         name: 'Gorce',
         bonus: '7.5% Damage',
         fusedFams: 'Golum + Chilro',
@@ -419,7 +419,7 @@ const fusions = [
 
     //------------- COMMONS DUNGEON -------------//
     {
-        image: 'url("/dist/imgs/rombolio.png")',
+        image: 'url("dist/imgs/rombolio.png")',
         name: 'Rombolio',
         bonus: '30% Evade Chance, 15% Redirect Chance',
         fusedFams: 'Bobodom + Olxaroth + Capt. Wombomz',
