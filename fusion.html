@@ -20,6 +20,16 @@
         </ul>
     </header>
 
+    <div id="selector">
+        <p>Search by: </p>
+        <select name="search" id="search">
+            <option value="name">Name</option>
+            <option value="bonus">Bonus Stat</option>
+        </select>
+        <input type="text" name="searchbar" id="searchbar" placeholder="Enter text here">
+        <button class="btn" id="searchbtn" name="searchbtn" onclick="search()">Search</button>
+    </div>
+
     <!-- location to place the updated template children -->
     <div id="fusions">
     </div>
