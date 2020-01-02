@@ -1,3 +1,5 @@
+ 
+
 //damage/heal targets for individual attacks
 const closest = 'Damage closest';
 const target = 'Damage target';
@@ -111,6 +113,95 @@ function genFusions(element) {
     //adds template as child into html under #fusions id
     fusionTable.appendChild(fusionElement);
 }
+
+function search(){
+    //needs to pull name or bonus stat info from #search, then look for
+    //#searchbar info in column depending on #search setting, clear tables and
+    //update with only familiars that match
+    
+    const searchMode = document.querySelector('#search');
+    const searchBar = document.querySelector('#searchbar');
+
+    //creates array for total list to remove
+    const fusionGroups = document.querySelectorAll('#fusionTable');
+
+    //clears existing table
+    fusionGroups.forEach(element => {
+        fusionTable.removeChild(element);
+    });
+
+    // console.log(searchMode);
+
+    if(searchBar.value != ''){
+        if(searchMode.value == 'bonus'){
+            //look in bonusStat for value
+            console.log('bonus');
+            console.log(searchBar);
+
+            fusions.forEach(element => {
+                //foreach may not be correct, but need to filter down to an array with the searchtext
+                console.log(element);
+            });
+        }
+
+        if(searchMode.value == 'name'){
+            //look in fusionName for value
+            
+            //breaks searchbar value into array
+            const v = searchBar.value.toLowerCase().split('');
+            console.log(v);
+            
+
+            //for each fusion
+            fusions.forEach(element => {
+                //breaks element name into array
+                const n = element.name.toLowerCase().split('');
+                //variable to compare to name length
+                
+
+                //while variable is less than name length
+                if(n.length == v.length){
+                    let i = 0;
+                    while (i < n.length+1) {
+                        
+                        //if array cells match
+                        if(n[i] == v[i]){
+                            //increase array count and gen fusion???
+                            i++;
+                        }else{
+                        return;
+                        }
+                    }
+                    genFusions(element);
+                }else if(v.includes('*')){
+                    if(v[0] == '*'){
+                        //dunno how, but check end of array to include letters
+                    }  else if(v[v.length-1] == '*'){
+                        //check beginning of array to match
+                        for (let i = 0; i < v.length-1; i++) {
+                            if(v[i] != n[i]){
+                                return false;
+                            }
+                        }
+                        genFusions(element);
+                    }
+                    }
+                else{
+                    return;
+                }
+                
+            });
+        }
+    } else{
+        fusions.forEach(element => {
+            genFusions(element);
+        });
+    }
+}
+
+
+// if (n.some(r => v.includes(r))){
+//     genFusions(element);
 
 //full list of fusions
 const fusions = [
