@@ -63,8 +63,9 @@ function genFusions(element) {
     skill6.textContent = element.atk6;
 
     const bonusStat = fusionElement.querySelector('#bonusStat');
+    //if fusion has more than 1 bonus stat display both with spacing, else display one
     if(element.perc2 == ''){
-        bonusStat.textContent = element.perc1 + element.bonus1 + element.perc2 + element.bonus2;
+        bonusStat.textContent = element.perc1 + element.bonus1;
     } else if(element.perc2 != ''){
         bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2;
     };
@@ -178,29 +179,47 @@ function search(){
                     }
                     genFusions(element);
                 }else if(v.includes('*')){
+                    //wildcard search prior to text to search for partial names
+
+                    //if asterisk is at the beginning of query
                     if(v[0] == '*'){
-                        //dunno how, but check end of array to include letters
                         let j = 1;
+
+                        //run through element.name array
                         for (let i = 0; i < n.length; i++) {
+
                             // console.log(n[i]);
                             // console.log(j);
                             // console.log(v.length-1);
+
+                            //if j is less than query length -1
                             if(j != v.length-1){
+                                //check if fusion name item is equal to query item j
                                 if(n[i] != v[j]){
+                                    //if not, reset j to 1
                                     j = 1;
                                 } else {
+                                    //if so, increment j
                                     j++
+
                                     // console.log(j + ' success');
                                 }
+                            //once j is equal to query length -1
                             } else if(j == v.length-1){
                                 // console.log(i);
                                 // console.log(n.length-1);
+
+                                //if position in element.name array is equal to element.name length -1
                                 if(i == n.length-1){
+                                    //check if fusion name item equals query item j
                                     if(n[i] == v[j]){
                                         // console.log('genned fusion ' + element.name);
+
+                                        //if so, gen the fusion and reset j
                                         genFusions(element);
                                         j=1;
                                     }
+                                //if not at the end of the name, reset j
                                 } else{
                                     j = 1;
                                 }
@@ -208,13 +227,20 @@ function search(){
                             
                         }
                     }  else if(v[v.length-1] == '*'){
-                        //check beginning of array to match
+                        //wildcard search after text to search for partial names
+
+                        //run through query prior to asterisk
                         for (let i = 0; i < v.length-1; i++) {
+                            //if query item does not equal fusion name item
                             if(v[i] != n[i]){
+                                //end loop
                                 return false;
+                            //else if query item equals fusion name item and i equals length -2
+                            }else if(v[i] == n[i] && i == v.length-2) {
+                                //gen the fusion
+                                genFusions(element);
                             }
                         }
-                        genFusions(element);
                     }
                     }
                 else{
