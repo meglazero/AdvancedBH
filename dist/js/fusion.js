@@ -63,7 +63,11 @@ function genFusions(element) {
     skill6.textContent = element.atk6;
 
     const bonusStat = fusionElement.querySelector('#bonusStat');
-    bonusStat.textContent = element.bonus;
+    if(element.perc2 == ''){
+        bonusStat.textContent = element.perc1 + element.bonus1 + element.perc2 + element.bonus2;
+    } else if(element.perc2 != ''){
+        bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2;
+    };
 
     const hpValue = fusionElement.querySelector('#hpValue');
     hpValue.textContent = element.hp;
@@ -149,7 +153,7 @@ function search(){
             
             //breaks searchbar value into array
             const v = searchBar.value.toLowerCase().split('');
-            console.log(v);
+            // console.log(v);
             
 
             //for each fusion
@@ -176,6 +180,33 @@ function search(){
                 }else if(v.includes('*')){
                     if(v[0] == '*'){
                         //dunno how, but check end of array to include letters
+                        let j = 1;
+                        for (let i = 0; i < n.length; i++) {
+                            // console.log(n[i]);
+                            // console.log(j);
+                            // console.log(v.length-1);
+                            if(j != v.length-1){
+                                if(n[i] != v[j]){
+                                    j = 1;
+                                } else {
+                                    j++
+                                    // console.log(j + ' success');
+                                }
+                            } else if(j == v.length-1){
+                                // console.log(i);
+                                // console.log(n.length-1);
+                                if(i == n.length-1){
+                                    if(n[i] == v[j]){
+                                        // console.log('genned fusion ' + element.name);
+                                        genFusions(element);
+                                        j=1;
+                                    }
+                                } else{
+                                    j = 1;
+                                }
+                            }
+                            
+                        }
                     }  else if(v[v.length-1] == '*'){
                         //check beginning of array to match
                         for (let i = 0; i < v.length-1; i++) {
@@ -197,7 +228,7 @@ function search(){
             genFusions(element);
         });
     }
-}
+};
 
 
 // if (n.some(r => v.includes(r))){
@@ -211,7 +242,10 @@ const fusions = [
 
         image: 'url("dist/imgs/prof-gak.png")',
         name: 'Prof. Gak',
-        bonus: '7.5% Health',
+        perc1: '7.5% ',
+        bonus1: 'Health',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Gak + Prof. Oak',
         atk: '20.6%',
         hp: '29.3%',
@@ -229,7 +263,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/booty.png")',
         name: 'Booty',
-        bonus: '7.5% Life Steal',
+        perc1: '7.5% ',
+        bonus1: 'Life Steal',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'BooBoo + Batty',
         atk: '26%',
         hp: '17.3%',
@@ -247,7 +284,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/narchie.png")',
         name: 'Narchie',
-        bonus: '7.5% Speed',
+        perc1: '7.5% ',
+        bonus1: 'Speed',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Archie + Naginee',
         atk: '18.4%',
         hp: '18.4%',
@@ -265,7 +305,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/jugg.png")',
         name: 'Jugg',
-        bonus: '15% Crit Chance',
+        perc1: '15% ',
+        bonus1: 'Crit Chance',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Sugg + Juice',
         atk: '27.1%',
         hp: '29.3%',
@@ -283,7 +326,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/krives.png")',
         name: 'Krives',
-        bonus: '7.5% Damage',
+        perc1: '7.5% ',
+        bonus1: 'Damage',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Krusty + Ives',
         atk: '19.5%',
         hp: '21.7%',
@@ -301,7 +347,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/naukmo.png")',
         name: 'Naukmo',
-        bonus: '7.5% Evade Chance',
+        perc1: '7.5% ',
+        bonus1: 'Evade Chance',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Baumo + Nock',
         atk: '17.3%',
         hp: '33.6%',
@@ -319,7 +368,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/esskelegro.png")',
         name: "Es'Skelegro",
-        bonus: '7.5% Damage Enrage',
+        perc1: '7.5% ',
+        bonus1: 'Damage Enrage',
+        perc2: '',
+        bonus2: '',
         fusedFams: "Es'Skeleto + 2 Jumbo Syrum",
         atk: '19.5%',
         hp: '26%',
@@ -337,7 +389,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/grolum.png")',
         name: 'Grolum',
-        bonus: '15% Crit Chance',
+        perc1: '15% ',
+        bonus1: 'Crit Chance',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Golum + 2 Jumbo Syrum',
         atk: '21.7%',
         hp: '10.8%',
@@ -355,7 +410,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/zammy.png")',
         name: 'Zammy',
-        bonus: '7.5% Speed',
+        perc1: '7.5% ',
+        bonus1: 'Speed',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Sammy + 2 Mini Syrum',
         atk: '24.9%',
         hp: '19.5%',
@@ -373,7 +431,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/saerugg.png")',
         name: 'Saerugg',
-        bonus: '15% Block Chance',
+        perc1: '15% ',
+        bonus1: 'Block Chance',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Saerebrum + Uggs',
         atk: '23.8%',
         hp: '30.3%',
@@ -391,7 +452,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/asst-oak.png")',
         name: 'Asst. Oak',
-        bonus: '4.5% Deflect Chance',
+        perc1: '4.5% ',
+        bonus1: 'Deflect Chance',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Prof. Oak + 2 Mini Syrum',
         atk: '20.6%',
         hp: '29.3%',
@@ -409,7 +473,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/immyt.png")',
         name: 'Immyt',
-        bonus: '7.5% Evade Chance',
+        perc1: '7.5% ',
+        bonus1: 'Evade Chance',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Emmyt + 2 Mini Syrum',
         atk: '21.7%',
         hp: '29.3%',
@@ -427,7 +494,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/bummih.png")',
         name: 'Bummih',
-        bonus: '7.5% Dual Strike',
+        perc1: '7.5% ',
+        bonus1: 'Dual Strike',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Mummih + 2 Jumbo Syrum',
         atk: '20.6%',
         hp: '17.3%',
@@ -445,7 +515,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/vickoo.png")',
         name: 'Vickoo',
-        bonus: '7.5% Dual Strike',
+        perc1: '7.5% ',
+        bonus1: 'Dual Strike',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'BooBoo + Vicky',
         atk: '26%',
         hp: '17.3%',
@@ -463,7 +536,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/saerebrumark.png")',
         name: 'Saerebrumark',
-        bonus: '7.5% Evade Chance',
+        perc1: '7.5% ',
+        bonus1: 'Evade Chance',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Saerebrum + Samark',
         atk: '13.8%',
         hp: '32.5%',
@@ -481,7 +557,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/gorce.png")',
         name: 'Gorce',
-        bonus: '7.5% Damage',
+        perc1: '7.5% ',
+        bonus1: 'Damage',
+        perc2: '',
+        bonus2: '',
         fusedFams: 'Golum + Chilro',
         atk: '40%',
         hp: '16.3%',
@@ -510,7 +589,10 @@ const fusions = [
     {
         image: 'url("dist/imgs/rombolio.png")',
         name: 'Rombolio',
-        bonus: '30% Evade Chance, 15% Redirect Chance',
+        perc1: '30% ',
+        bonus1: 'Evade Chance',
+        perc2: '15% ',
+        bonus2: 'Redirect Chance',
         fusedFams: 'Bobodom + Olxaroth + Capt. Wombomz',
         atk: '31.7%',
         hp: '41.7%',
