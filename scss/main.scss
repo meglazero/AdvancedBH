@@ -42,6 +42,10 @@ body{
         position: relative;
     }
 
+    .btn:hover{
+        background-color: #707070
+    }
+
     .btn::before, .btn::after{
         content: "";
         position: absolute;
@@ -124,20 +128,30 @@ body{
 
     #selector{
         display: flex;
-        justify-content: right;
+        justify-content: left;
         padding: 10px;
         margin: 5px auto;
 
         p{
             font-size: 20px;
             margin: auto 5px;
-            color: blue;
+            color: rgb(28, 223, 158);
+        }
+
+        option{
+            background-color: #777777; 
+        }
+
+        .search{
+            padding: 0 5px;
+            margin: 0 5px;
+            border: 2px solid rgb(28, 223, 158);
         }
 
         #search{
             background: none;
-            border: 2px solid blue;
-            color: blue;
+            border: none;
+            color: rgb(28, 223, 158);
             text-align: center;
             width: 175px;
             padding: 10px;
@@ -145,11 +159,47 @@ body{
             font-size: 20px;
         }
 
+        .search:hover{
+            background-color: #686868;
+        }
+
         #searchbar{
+            display: inline;
+        }
+
+        #bonusSearch{
+            display: none;
+            
+        }
+
+        .bonus{
+            border: 2px solid rgb(28, 223, 158);
+            margin: 0 5px;
+            padding: 0 5px;
+            .searchbar{
+                width: auto;
+                height: 100%;
+                border: none;
+            }
+
+            option{
+                color: rgb(28, 223, 158);
+            }
+
+            #divider{
+                color: #fff;
+            }
+        }
+
+        .bonus:hover{
+            background-color: #686868;
+        }
+
+        .searchbar{
             width: 15%;
             background: none;
-            border: 2px solid blue;
-            color: blue;
+            border: 2px solid rgb(28, 223, 158);
+            color: rgb(28, 223, 158);
             font-size: 18px;
             padding: 0 5px;
             margin: 0 5px;
@@ -157,8 +207,22 @@ body{
 
         #searchbtn{
             height: 50px;
-            color: blue;
+            color: rgb(28, 223, 158);
             border: 2px solid;
+            margin: 0 5px;
+        }
+
+        #clearbtn{
+            margin-left: auto;
+            height: 50px;
+            color: #e06737;
+            border: 2px solid;
+        }
+
+        i{
+            margin: auto 0;
+            padding: 0 5px;
+            color: rgb(28, 223, 158);
         }
     }
     

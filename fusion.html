@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="dist/css/main.css">
+    <script src="https://kit.fontawesome.com/1d69a993e8.js" crossorigin="anonymous"></script>
     <title>Bit Heroes Advanced Information | Fusions</title>
 </head>
 
@@ -19,15 +20,44 @@
             <li><a href="https://store.steampowered.com/app/666860/Bit_Heroes/" target="-blank">Steam</a></li>
         </ul>
     </header>
-
+    
     <div id="selector">
         <p>Search by: </p>
+        <div class="search">
         <select name="search" id="search">
-            <option value="name">Name</option>
-            <option value="bonus">Bonus Stat</option>
+            <option value="name" onclick="modeCheck()">Name<i class="fas fa-angle-down"></i></option>
+            <option value="bonus" onclick="modeCheck()">Bonus Stat<i class="fas fa-angle-down"></i></option>
         </select>
-        <input type="text" name="searchbar" id="searchbar" placeholder="Enter text here">
+        <i class="fas fa-angle-down" id="mode"></i>
+        </div>
+        <input type="text" name="searchbar" id="searchbar" class="searchbar" placeholder="Enter text here">
+        <div class="bonus">
+        <select name="bonusSearch" id="bonusSearch" class="searchbar">
+            <option value="damage">Damage</option>
+            <option value="health">Health</option>
+            <option value="speed">Speed</option>
+            <option value="" disabled id="divider">------</option>
+            <option value="crit chance">Crit chance</option>
+            <option value="crit damage">Crit damage</option>
+            <option value="life steal">Life steal</option>
+            <option value="dual strike">Dual strike</option>
+            <option value="empower chance">Empower chance</option>
+            <option value="quad strike">Quad strike</option>
+            <option value="" disabled id="divider">------</option>
+            <option value="evade chance">Evade chance</option>
+            <option value="block chance">Block chance</option>
+            <option value="damage enrage">Damage enrage</option>
+            <option value="deflect chance">Deflect chance</option>
+            <option value="absorb chance">Absorb chance</option>
+            <option value="damage reduction">Damage reduction</option>
+            <option value="redirect chance">Redirect chance</option>
+        </select>
+        <i class="fas fa-angle-down" id="bonus"></i>
+        </div>
+        
         <button class="btn" id="searchbtn" name="searchbtn" onclick="search()">Search</button>
+
+        <button class="btn" id="clearbtn" name="clearbtn" onclick="clearTable()">Clear filter</button>
     </div>
 
     <!-- location to place the updated template children -->

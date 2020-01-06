@@ -119,13 +119,39 @@ function genFusions(element) {
     fusionTable.appendChild(fusionElement);
 }
 
+const searchMode = document.querySelector('#search');
+const searchBar = document.querySelector('#searchbar');
+const bonusSearch = document.querySelector('#bonusSearch');
+
+function modeCheck(){
+    if(searchMode.value == 'bonus'){
+        searchBar.style.display = 'none';
+        bonusSearch.style.display = 'inline';
+    } else {
+        searchBar.style.display = 'inline';
+        bonusSearch.style.display = 'none';
+    }
+};
+
+function clearTable(){
+    console.log('attempted clear');
+    const fusionGroups = document.querySelectorAll('#fusionTable');
+    
+    fusionGroups.forEach(element => {
+        fusionTable.removeChild(element);
+    });
+    
+    fusions.forEach(element => {
+        genFusions(element);
+    });
+};
+
 function search(){
     //needs to pull name or bonus stat info from #search, then look for
     //#searchbar info in column depending on #search setting, clear tables and
     //update with only familiars that match
     
-    const searchMode = document.querySelector('#search');
-    const searchBar = document.querySelector('#searchbar');
+    
 
     //creates array for total list to remove
     const fusionGroups = document.querySelectorAll('#fusionTable');
@@ -141,11 +167,15 @@ function search(){
         if(searchMode.value == 'bonus'){
             //look in bonusStat for value
             console.log('bonus');
-            console.log(searchBar);
 
             fusions.forEach(element => {
                 //foreach may not be correct, but need to filter down to an array with the searchtext
-                console.log(element);
+                const b1 = element.bonus1.toLowerCase();
+                const b2 = element.bonus2.toLowerCase();
+
+                if(bonusSearch.value == b1 || bonusSearch.value == b2){
+                    genFusions(element);
+                }
             });
         }
 
@@ -649,7 +679,7 @@ const fusions = [
     },
 ];
 
+modeCheck();
+
 //onload runs through each fusion and loads the table of all fusions in array
-fusions.forEach(element => {
-    genFusions(element);
-});
+clearTable();

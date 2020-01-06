@@ -43,6 +43,10 @@ body .btn {
   position: relative;
 }
 
+body .btn:hover {
+  background-color: #707070;
+}
+
 body .btn::before, body .btn::after {
   content: "";
   position: absolute;
@@ -137,9 +141,9 @@ body #selector {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
   padding: 10px;
   margin: 5px auto;
 }
@@ -147,13 +151,23 @@ body #selector {
 body #selector p {
   font-size: 20px;
   margin: auto 5px;
-  color: blue;
+  color: #1cdf9e;
+}
+
+body #selector option {
+  background-color: #777777;
+}
+
+body #selector .search {
+  padding: 0 5px;
+  margin: 0 5px;
+  border: 2px solid #1cdf9e;
 }
 
 body #selector #search {
   background: none;
-  border: 2px solid blue;
-  color: blue;
+  border: none;
+  color: #1cdf9e;
   text-align: center;
   width: 175px;
   padding: 10px;
@@ -161,11 +175,47 @@ body #selector #search {
   font-size: 20px;
 }
 
+body #selector .search:hover {
+  background-color: #686868;
+}
+
 body #selector #searchbar {
+  display: inline;
+}
+
+body #selector #bonusSearch {
+  display: none;
+}
+
+body #selector .bonus {
+  border: 2px solid #1cdf9e;
+  margin: 0 5px;
+  padding: 0 5px;
+}
+
+body #selector .bonus .searchbar {
+  width: auto;
+  height: 100%;
+  border: none;
+}
+
+body #selector .bonus option {
+  color: #1cdf9e;
+}
+
+body #selector .bonus #divider {
+  color: #fff;
+}
+
+body #selector .bonus:hover {
+  background-color: #686868;
+}
+
+body #selector .searchbar {
   width: 15%;
   background: none;
-  border: 2px solid blue;
-  color: blue;
+  border: 2px solid #1cdf9e;
+  color: #1cdf9e;
   font-size: 18px;
   padding: 0 5px;
   margin: 0 5px;
@@ -173,8 +223,22 @@ body #selector #searchbar {
 
 body #selector #searchbtn {
   height: 50px;
-  color: blue;
+  color: #1cdf9e;
   border: 2px solid;
+  margin: 0 5px;
+}
+
+body #selector #clearbtn {
+  margin-left: auto;
+  height: 50px;
+  color: #e06737;
+  border: 2px solid;
+}
+
+body #selector i {
+  margin: auto 0;
+  padding: 0 5px;
+  color: #1cdf9e;
 }
 
 body #fusions {
