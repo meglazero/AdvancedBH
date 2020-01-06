@@ -183,11 +183,8 @@ body #selector #searchbar {
   display: inline;
 }
 
-body #selector #bonusSearch {
-  display: none;
-}
-
 body #selector .bonus {
+  display: none;
   border: 2px solid #1cdf9e;
   margin: 0 5px;
   padding: 0 5px;

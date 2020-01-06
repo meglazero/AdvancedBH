@@ -121,15 +121,16 @@ function genFusions(element) {
 
 const searchMode = document.querySelector('#search');
 const searchBar = document.querySelector('#searchbar');
+const bonusBox = document.querySelector('.bonus');
 const bonusSearch = document.querySelector('#bonusSearch');
 
 function modeCheck(){
     if(searchMode.value == 'bonus'){
         searchBar.style.display = 'none';
-        bonusSearch.style.display = 'inline';
+        bonusBox.style.display = 'inline';
     } else {
         searchBar.style.display = 'inline';
-        bonusSearch.style.display = 'none';
+        bonusBox.style.display = 'none';
     }
 };
 
