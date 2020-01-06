@@ -218,6 +218,7 @@ function search(){
                                         //if so, gen the fusion and reset j
                                         genFusions(element);
                                         j=1;
+                                        return;
                                     }
                                 //if not at the end of the name, reset j
                                 } else{
@@ -239,6 +240,7 @@ function search(){
                             }else if(v[i] == n[i] && i == v.length-2) {
                                 //gen the fusion
                                 genFusions(element);
+                                return;
                             }
                         }
                     }
@@ -252,6 +254,7 @@ function search(){
     } else{
         fusions.forEach(element => {
             genFusions(element);
+            return;
         });
     }
 };
