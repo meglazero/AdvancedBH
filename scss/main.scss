@@ -126,71 +126,71 @@ body{
         
     }
 
+    //filter area
     #selector{
         display: flex;
         justify-content: left;
         padding: 10px;
         margin: 5px auto;
 
+        //Search by: text
         p{
             font-size: 20px;
             margin: auto 5px;
             color: rgb(28, 223, 158);
         }
 
+        //select option backgrounds
         option{
             background-color: #777777; 
         }
 
+        //bonus selector dropdown dividers
+        #divider{
+            color: #fff;
+        }
+
+        //searchbox around mode selector
         .search{
+            display: flex;
+            flex-wrap: nowrap;
             padding: 0 5px;
             margin: 0 5px;
             border: 2px solid rgb(28, 223, 158);
-        }
-
-        #search{
-            background: none;
-            border: none;
-            color: rgb(28, 223, 158);
-            text-align: center;
-            width: 175px;
-            padding: 10px;
-            margin: 0 5px;
-            font-size: 20px;
         }
 
         .search:hover{
             background-color: #686868;
         }
 
-        #searchbar{
-            display: inline;
+        //mode select option and bonusstat selector option
+        //search id and bonusSearch id
+        #search, #bonusSearch{
+            background: none;
+            border: none;
+            color: rgb(28, 223, 158);
+            text-align: center;
+            // width: 175px;
+            padding: 10px;
+            margin: 0 5px;
+            font-size: 20px;
+            flex: 1;
         }
 
+        //box around bonus stat selector area
         .bonus{
-            display: none;
+            display: flex;
+            flex-wrap: nowrap;
             border: 2px solid rgb(28, 223, 158);
             margin: 0 5px;
             padding: 0 5px;
-            .searchbar{
-                width: auto;
-                height: 100%;
-                border: none;
-            }
-
-            option{
-                color: rgb(28, 223, 158);
-            }
-
-            #divider{
-                color: #fff;
-            }
         }
 
         .bonus:hover{
             background-color: #686868;
         }
 
+        //text entry and bonus selector boxes
         .searchbar{
             width: 15%;
             background: none;
@@ -201,6 +201,7 @@ body{
             margin: 0 5px;
         }
 
+        //search button to filter table
         #searchbtn{
             height: 50px;
             color: rgb(28, 223, 158);
@@ -208,6 +209,7 @@ body{
             margin: 0 5px;
         }
 
+        //clear button to reset table
         #clearbtn{
             margin-left: auto;
             height: 50px;
@@ -215,6 +217,7 @@ body{
             border: 2px solid;
         }
 
+        //down arrows replacing inline ones
         i{
             margin: auto 0;
             padding: 0 5px;

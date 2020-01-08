@@ -128,9 +128,9 @@ function genFusions(element) {
 function modeCheck(){
     if(searchMode.value == 'bonus'){
         searchBar.style.display = 'none';
-        bonusBox.style.display = 'inline';
+        bonusBox.style.display = 'flex';
     } else {
-        searchBar.style.display = 'inline';
+        searchBar.style.display = 'flex';
         bonusBox.style.display = 'none';
     }
 };

@@ -158,50 +158,47 @@ body #selector option {
   background-color: #777777;
 }
 
+body #selector #divider {
+  color: #fff;
+}
+
 body #selector .search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   padding: 0 5px;
   margin: 0 5px;
   border: 2px solid #1cdf9e;
-}
-
-body #selector #search {
-  background: none;
-  border: none;
-  color: #1cdf9e;
-  text-align: center;
-  width: 175px;
-  padding: 10px;
-  margin: 0 5px;
-  font-size: 20px;
 }
 
 body #selector .search:hover {
   background-color: #686868;
 }
 
-body #selector #searchbar {
-  display: inline;
+body #selector #search, body #selector #bonusSearch {
+  background: none;
+  border: none;
+  color: #1cdf9e;
+  text-align: center;
+  padding: 10px;
+  margin: 0 5px;
+  font-size: 20px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 body #selector .bonus {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   border: 2px solid #1cdf9e;
   margin: 0 5px;
   padding: 0 5px;
-}
-
-body #selector .bonus .searchbar {
-  width: auto;
-  height: 100%;
-  border: none;
-}
-
-body #selector .bonus option {
-  color: #1cdf9e;
-}
-
-body #selector .bonus #divider {
-  color: #fff;
 }
 
 body #selector .bonus:hover {

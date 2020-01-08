@@ -24,35 +24,35 @@
     <div id="selector">
         <p>Search by: </p>
         <div class="search">
-        <select name="search" id="search">
-            <option value="name" onclick="modeCheck()">Name<i class="fas fa-angle-down"></i></option>
-            <option value="bonus" onclick="modeCheck()">Bonus Stat<i class="fas fa-angle-down"></i></option>
-        </select>
-        <i class="fas fa-angle-down" id="mode"></i>
+            <select name="search" id="search">
+                <option value="name" onclick="modeCheck()">Name<i class="fas fa-angle-down"></i></option>
+                <option value="bonus" onclick="modeCheck()">Bonus Stat<i class="fas fa-angle-down"></i></option>
+            </select>
+            <i class="fas fa-angle-down" id="mode"></i>
         </div>
         <input type="text" name="searchbar" id="searchbar" class="searchbar" placeholder="Enter text here">
         <div class="bonus">
-        <select name="bonusSearch" id="bonusSearch" class="searchbar">
-            <option value="damage">Damage</option>
-            <option value="health">Health</option>
-            <option value="speed">Speed</option>
-            <option value="" disabled id="divider">------</option>
-            <option value="crit chance">Crit chance</option>
-            <option value="crit damage">Crit damage</option>
-            <option value="life steal">Life steal</option>
-            <option value="dual strike">Dual strike</option>
-            <option value="empower chance">Empower chance</option>
-            <option value="quad strike">Quad strike</option>
-            <option value="" disabled id="divider">------</option>
-            <option value="evade chance">Evade chance</option>
-            <option value="block chance">Block chance</option>
-            <option value="damage enrage">Damage enrage</option>
-            <option value="deflect chance">Deflect chance</option>
-            <option value="absorb chance">Absorb chance</option>
-            <option value="damage reduction">Damage reduction</option>
-            <option value="redirect chance">Redirect chance</option>
-        </select>
-        <i class="fas fa-angle-down" id="bonus"></i>
+            <select name="bonusSearch" id="bonusSearch" class="searchbar">
+                <option value="damage">Damage</option>
+                <option value="health">Health</option>
+                <option value="speed">Speed</option>
+                <option value="" disabled id="divider">------</option>
+                <option value="crit chance">Crit chance</option>
+                <option value="crit damage">Crit damage</option>
+                <option value="life steal">Life steal</option>
+                <option value="dual strike">Dual strike</option>
+                <option value="empower chance">Empower chance</option>
+                <option value="quad strike">Quad strike</option>
+                <option value="" disabled id="divider">------</option>
+                <option value="evade chance">Evade chance</option>
+                <option value="block chance">Block chance</option>
+                <option value="damage enrage">Damage enrage</option>
+                <option value="deflect chance">Deflect chance</option>
+                <option value="absorb chance">Absorb chance</option>
+                <option value="damage reduction">Damage reduction</option>
+                <option value="redirect chance">Redirect chance</option>
+            </select>
+            <i class="fas fa-angle-down" id="bonus"></i>
         </div>
         
         <button class="btn" id="searchbtn" name="searchbtn" onclick="search()">Search</button>
