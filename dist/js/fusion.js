@@ -20,6 +20,8 @@ const bonusBox = document.querySelector('.bonus');
 const bonusSearch = document.querySelector('#bonusSearch');
 const filteredFusions = [];
 
+const alphanum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 //pulls all the relevant info, places in correct div, and pushes a child out to parent
 function genFusions(element) {
     //imports template from fusion.html
@@ -152,6 +154,32 @@ function clearTable(){
     });
 };
 
+function removeNonLetters(arr){
+    const al = arr.length;
+    var tf = true;
+
+    for (let i = 0; i <= al-1; i++) {
+        const e1 = arr[i];
+
+        e1 != alphanum.some(function check(e1){
+            if(e1 == arr[i]){
+                return tf = true;
+            }else{
+                return tf = false;
+            }
+        })
+
+        if(tf == false){
+            arr.splice(i, 1);
+        }
+    }
+    
+    if(arr[arr.length-1] == '*'){
+        arr.pop();
+    }
+
+}
+
     //pulls name or bonus stat info from #search, then looks for
     //#searchbar info in column depending on #search setting, clear tables and
     //update with only familiars that match
@@ -176,21 +204,34 @@ function search(){
 
         if(searchMode.value == 'name'){
             //breaks searchbar value into array
-            const v = searchBar.value.toLowerCase().split('');  
+            var v = searchBar.value.toLowerCase().split('');
+            var iv = v;
+
+            iv = iv.filter(function(str) {
+                return /\S/.test(str);
+            });
+
+            removeNonLetters(iv);
 
             //for each fusion
             fusions.forEach(element => {
                 //breaks element name into array
-                const n = element.name.toLowerCase().split('');
+                var n = element.name.toLowerCase().split('');
+
+                n = n.filter(function(str) {
+                    return /\S/.test(str);
+                });
+
+                removeNonLetters(n);
 
                 //while variable is less than name length
-                if(n.length == v.length){
+                if(n.length == iv.length){
                     //set counter variable
                     let i = 0;
                     //run checks against counter time
                     while (i < n.length) {
                         //if array cells match
-                        if(n[i] == v[i]){
+                        if(n[i] == iv[i]){
                             //increase array count
                             i++;
                         }else{
@@ -205,48 +246,45 @@ function search(){
 
                     //if asterisk is at the beginning of query
                     if(v[0] == '*'){
-                        let j = 1;
+                        let j = 0;
 
                         //run through element.name array
                         for (let i = 0; i < n.length; i++) {
                             //if j is less than query length -1
-                            if(j != v.length-1){
+                            if(j != iv.length-1){
                                 //check if fusion name item is equal to query item j
-                                if(n[i] != v[j]){
-                                    //if not, reset j to 1
-                                    j = 1;
+                                if(n[i] != iv[j]){
+                                    //if not, reset j to 0
+                                    j = 0;
                                 } else {
                                     //if so, increment j
                                     j++
                                 }
                             //once j is equal to query length -1 and i is equal to element.name length -1
-                            } else if(j == v.length-1 && i == n.length-1){
+                            } else if(j == iv.length-1 && i == n.length-1 && n[i] == iv[j]){
                                     //check if fusion name item equals query item j
-                                    if(n[i] == v[j]){
                                         //if so, push fusion to gen array and reset j
                                         filteredFusions.push(element);
-                                        j=1;
+                                        j=0;
                                         return;
-                                    }
                             }else{
                                 //if not at the end of the name, reset j
-                                j = 1;
+                                j = 0;
                             }
                         }
                     }  else if(v[v.length-1] == '*'){
                         //wildcard search after text to search for partial names
 
                         //run through query prior to asterisk
-                        for (let i = 0; i < v.length-1; i++) {
+                        for (let i = 0; i < iv.length; i++) {
                             //if query item does not equal fusion name item
-                            if(v[i] != n[i]){
+                            if(iv[i] != n[i]){
                                 //end loop
                                 return;
                             //else if query item equals fusion name item and i equals length -2
-                            }else if(v[i] == n[i] && i == v.length-2) {
+                            }else if(iv[i] == n[i] && i == iv.length-1) {
                                 //push fusion to gen array
                                 filteredFusions.push(element);
-                                return;
                             }
                         }
                     }
@@ -262,8 +300,7 @@ function search(){
     
     //creates array for total list to remove
     const fusionGroups = document.querySelectorAll('#fusionTable');
-
-    console.log(filteredFusions);
+    
     if(filteredFusions.length == 0){
         console.log('Search returned no result');
     }else{
