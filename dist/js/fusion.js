@@ -154,7 +154,7 @@ function clearTable(){
     });
 };
 
-function removeNonLetters(arr){
+function removeNonAlphanum(arr){
     const al = arr.length;
     var tf = true;
 
@@ -177,8 +177,7 @@ function removeNonLetters(arr){
     if(arr[arr.length-1] == '*'){
         arr.pop();
     }
-
-}
+};
 
     //pulls name or bonus stat info from #search, then looks for
     //#searchbar info in column depending on #search setting, clear tables and
@@ -189,13 +188,14 @@ function search(){
         //if mode selector is bonus
         if(searchMode.value == 'bonus'){
             //check each fusion
+            bLower = bonusSearch.value.toLowerCase();
             fusions.forEach(element => {
                 //load bonus1 and bonus2 to b1/b2 variable
                 const b1 = element.bonus1.toLowerCase();
                 const b2 = element.bonus2.toLowerCase();
 
                 //if the searchbar is equal to either bonusstat
-                if(bonusSearch.value == b1 || bonusSearch.value == b2){
+                if(bLower == b1 || bLower == b2){
                     //push fusion to gen array
                     filteredFusions.push(element);
                 }
@@ -211,7 +211,7 @@ function search(){
                 return /\S/.test(str);
             });
 
-            removeNonLetters(iv);
+            removeNonAlphanum(iv);
 
             //for each fusion
             fusions.forEach(element => {
@@ -222,7 +222,7 @@ function search(){
                     return /\S/.test(str);
                 });
 
-                removeNonLetters(n);
+                removeNonAlphanum(n);
 
                 //while variable is less than name length
                 if(n.length == iv.length){
@@ -296,20 +296,20 @@ function search(){
             });
         }
     };
-
     
     //creates array for total list to remove
     const fusionGroups = document.querySelectorAll('#fusionTable');
     
+    //error checking if no familiars found
     if(filteredFusions.length == 0){
         console.log('Search returned no result');
     }else{
-        
         //clears existing table
         fusionGroups.forEach(element => {
             fusionTable.removeChild(element);
         });
 
+        //gens fusions based on filtered list
         filteredFusions.forEach(element => {
             genFusions(element);
         });
@@ -322,10 +322,6 @@ function search(){
     }
 
 };
-
-
-// if (n.some(r => v.includes(r))){
-//     genFusions(element);
 
 //full list of fusions
 const fusions = [
@@ -711,7 +707,6 @@ const fusions = [
     },
 ];
 
+//onLoad gens all fusions and adjusts forms based on modeselector
 modeCheck();
-
-//onload runs through each fusion and loads the table of all fusions in array
 clearTable();
