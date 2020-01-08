@@ -1,5 +1,3 @@
- 
-
 //damage/heal targets for individual attacks
 const closest = 'Damage closest';
 const target = 'Damage target';
@@ -14,6 +12,13 @@ const healt = 'Heal target';
 //sets up template and table to output information to from fusions objects
 const fusionTemplate = document.querySelector('#fusionTemplate');
 const fusionTable = document.querySelector('#fusions');
+
+//set search variables
+const searchMode = document.querySelector('#search');
+const searchBar = document.querySelector('#searchbar');
+const bonusBox = document.querySelector('.bonus');
+const bonusSearch = document.querySelector('#bonusSearch');
+const filteredFusions = [];
 
 //pulls all the relevant info, places in correct div, and pushes a child out to parent
 function genFusions(element) {
@@ -117,13 +122,9 @@ function genFusions(element) {
 
     //adds template as child into html under #fusions id
     fusionTable.appendChild(fusionElement);
-}
+};
 
-const searchMode = document.querySelector('#search');
-const searchBar = document.querySelector('#searchbar');
-const bonusBox = document.querySelector('.bonus');
-const bonusSearch = document.querySelector('#bonusSearch');
-
+    //checks whether search mode is in bonus stat or name and adjuts visibility as needed
 function modeCheck(){
     if(searchMode.value == 'bonus'){
         searchBar.style.display = 'none';
@@ -134,81 +135,71 @@ function modeCheck(){
     }
 };
 
+    //resets tabkle to display all familiars
 function clearTable(){
-    console.log('attempted clear');
+    //sets current fusion table in array
     const fusionGroups = document.querySelectorAll('#fusionTable');
     
+    //for each item in current talbe array
     fusionGroups.forEach(element => {
+        //remove the item
         fusionTable.removeChild(element);
     });
     
+    //run through and gen all fusions
     fusions.forEach(element => {
         genFusions(element);
     });
 };
 
-function search(){
-    //needs to pull name or bonus stat info from #search, then look for
+    //pulls name or bonus stat info from #search, then looks for
     //#searchbar info in column depending on #search setting, clear tables and
     //update with only familiars that match
-    
-    
-
-    //creates array for total list to remove
-    const fusionGroups = document.querySelectorAll('#fusionTable');
-
-    //clears existing table
-    fusionGroups.forEach(element => {
-        fusionTable.removeChild(element);
-    });
-
-    // console.log(searchMode);
-
+function search(){
+    //if there is a value entered in searchbar
     if(searchBar.value != ''){
+        //if mode selector is bonus
         if(searchMode.value == 'bonus'){
-            //look in bonusStat for value
-            console.log('bonus');
-
+            //check each fusion
             fusions.forEach(element => {
-                //foreach may not be correct, but need to filter down to an array with the searchtext
+                //load bonus1 and bonus2 to b1/b2 variable
                 const b1 = element.bonus1.toLowerCase();
                 const b2 = element.bonus2.toLowerCase();
 
+                //if the searchbar is equal to either bonusstat
                 if(bonusSearch.value == b1 || bonusSearch.value == b2){
-                    genFusions(element);
+                    //push fusion to gen array
+                    filteredFusions.push(element);
                 }
             });
         }
 
         if(searchMode.value == 'name'){
-            //look in fusionName for value
-            
             //breaks searchbar value into array
-            const v = searchBar.value.toLowerCase().split('');
-            // console.log(v);
-            
+            const v = searchBar.value.toLowerCase().split('');  
 
             //for each fusion
             fusions.forEach(element => {
                 //breaks element name into array
                 const n = element.name.toLowerCase().split('');
-                //variable to compare to name length
-                
 
                 //while variable is less than name length
                 if(n.length == v.length){
+                    //set counter variable
                     let i = 0;
-                    while (i < n.length+1) {
-                        
+                    //run checks against counter time
+                    while (i < n.length) {
                         //if array cells match
                         if(n[i] == v[i]){
-                            //increase array count and gen fusion???
+                            //increase array count
                             i++;
                         }else{
+                        //if array items don't match, end loop
                         return;
                         }
                     }
-                    genFusions(element);
+                    //if loop completes, all cells match, push fusion to gen array
+                    filteredFusions.push(element);
                 }else if(v.includes('*')){
                     //wildcard search prior to text to search for partial names
 
@@ -218,11 +209,6 @@ function search(){
 
                         //run through element.name array
                         for (let i = 0; i < n.length; i++) {
-
-                            // console.log(n[i]);
-                            // console.log(j);
-                            // console.log(v.length-1);
-
                             //if j is less than query length -1
                             if(j != v.length-1){
                                 //check if fusion name item is equal to query item j
@@ -232,31 +218,20 @@ function search(){
                                 } else {
                                     //if so, increment j
                                     j++
-
-                                    // console.log(j + ' success');
                                 }
-                            //once j is equal to query length -1
-                            } else if(j == v.length-1){
-                                // console.log(i);
-                                // console.log(n.length-1);
-
-                                //if position in element.name array is equal to element.name length -1
-                                if(i == n.length-1){
+                            //once j is equal to query length -1 and i is equal to element.name length -1
+                            } else if(j == v.length-1 && i == n.length-1){
                                     //check if fusion name item equals query item j
                                     if(n[i] == v[j]){
-                                        // console.log('genned fusion ' + element.name);
-
-                                        //if so, gen the fusion and reset j
-                                        genFusions(element);
+                                        //if so, push fusion to gen array and reset j
+                                        filteredFusions.push(element);
                                         j=1;
                                         return;
                                     }
+                            }else{
                                 //if not at the end of the name, reset j
-                                } else{
-                                    j = 1;
-                                }
+                                j = 1;
                             }
-                            
                         }
                     }  else if(v[v.length-1] == '*'){
                         //wildcard search after text to search for partial names
@@ -266,11 +241,11 @@ function search(){
                             //if query item does not equal fusion name item
                             if(v[i] != n[i]){
                                 //end loop
-                                return false;
+                                return;
                             //else if query item equals fusion name item and i equals length -2
                             }else if(v[i] == n[i] && i == v.length-2) {
-                                //gen the fusion
-                                genFusions(element);
+                                //push fusion to gen array
+                                filteredFusions.push(element);
                                 return;
                             }
                         }
@@ -282,12 +257,33 @@ function search(){
                 
             });
         }
-    } else{
-        fusions.forEach(element => {
-            genFusions(element);
-            return;
+    };
+
+    
+    //creates array for total list to remove
+    const fusionGroups = document.querySelectorAll('#fusionTable');
+
+    console.log(filteredFusions);
+    if(filteredFusions.length == 0){
+        console.log('Search returned no result');
+    }else{
+        
+        //clears existing table
+        fusionGroups.forEach(element => {
+            fusionTable.removeChild(element);
         });
+
+        filteredFusions.forEach(element => {
+            genFusions(element);
+        });
+        
+        //clear filteredFusions array
+        let ff = filteredFusions.length;
+        for (let i = 0; i < ff; i++) {
+            filteredFusions.shift();
+        };
     }
+
 };
 
 
@@ -296,10 +292,8 @@ function search(){
 
 //full list of fusions
 const fusions = [
+    //------------- COMMONS DUNGEON -------------//
     {
-        //------------- COMMONS DUNGEON -------------//
-
-
         image: 'url("dist/imgs/prof-gak.png")',
         name: 'Prof. Gak',
         perc1: '7.5% ',
