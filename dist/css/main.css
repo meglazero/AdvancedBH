@@ -99,7 +99,7 @@ body #mainHeader ul li {
 }
 
 body #mainImage {
-  background-image: url("../dist/imgs/BitHeroes.png");
+  background-image: url("dist/imgs/BitHeroes.png");
   background-repeat: no-repeat;
   background-position: center;
   background-color: #444444;
