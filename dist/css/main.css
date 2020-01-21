@@ -216,7 +216,7 @@ body #selector .searchbar {
 }
 
 body #selector #searchbtn {
-  height: 50px;
+  height: auto;
   color: #1cdf9e;
   border: 2px solid;
   margin: 0 5px;
@@ -224,7 +224,7 @@ body #selector #searchbtn {
 
 body #selector #clearbtn {
   margin-left: auto;
-  height: 50px;
+  height: auto;
   color: #e06737;
   border: 2px solid;
 }
@@ -233,6 +233,110 @@ body #selector i {
   margin: auto 0;
   padding: 0 5px;
   color: #1cdf9e;
+}
+
+body #selector #checkboxes {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+  margin-left: 50px;
+  padding: 2px;
+  border: dashed 1px #1cdf9e;
+}
+
+body #selector #checkboxes .common {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  border: solid 3px #9CE5B6;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1px 4px;
+  margin: 1px 2px;
+  width: 130px;
+}
+
+body #selector #checkboxes .common #common {
+  text-align: center;
+  width: 100%;
+}
+
+body #selector #checkboxes .rare {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  border: solid 3px #8687E1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1px 4px;
+  margin: 1px 2px;
+  width: 130px;
+}
+
+body #selector #checkboxes .rare #rare {
+  text-align: center;
+  width: 100%;
+}
+
+body #selector #checkboxes .epic {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  border: solid 3px #FC7E77;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1px 4px;
+  margin: 1px 2px;
+  width: 130px;
+}
+
+body #selector #checkboxes .epic #epic {
+  text-align: center;
+  width: 100%;
+}
+
+body #selector #checkboxes .legendary {
+  -ms-grid-row: 2;
+  grid-row: 2;
+  border: solid 3px #F7F72A;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1px 4px;
+  margin: 1px 2px;
+  width: 130px;
+}
+
+body #selector #checkboxes .legendary #legendary {
+  text-align: center;
+  width: 100%;
+}
+
+body #selector #checkboxes .mythic {
+  -ms-grid-row: 2;
+  grid-row: 2;
+  border: solid 3px #E4094A;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1px 4px;
+  margin: 1px 2px;
+  width: 130px;
+}
+
+body #selector #checkboxes .mythic #mythic {
+  text-align: center;
+  width: 100%;
+}
+
+body #selector #checkboxes .btn {
+  width: auto;
+  height: auto;
+  color: #4faeec;
+  padding: 1px 4px;
+  margin: 1px 2px;
+  border: 3px solid;
 }
 
 body #fusions {

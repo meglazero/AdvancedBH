@@ -56,6 +56,14 @@
         </div>
         
         <button class="btn" id="searchbtn" name="searchbtn" onclick="search()">Search</button>
+        <div id="checkboxes">
+            <div class="common"><input type="checkbox" id="commonCheck" value="common"><p id="common">Common</p></div>
+            <div class="rare"><input type="checkbox" id="rareCheck" value="rare"><p id="rare">Rare</p></div>
+            <div class="epic"><input type="checkbox" id="epicCheck" value="epic"><p id="epic">Epic</p></div>
+            <div class="legendary"><input type="checkbox" id="legendaryCheck" value="legendary"><p id="legendary">Legendary</p></div>
+            <div class="mythic"><input type="checkbox" id="mythicCheck" value="mythic"><p id="mythic">Mythic</p></div>
+            <button class="btn" id="clearChecks" onClick="clearChecks()">Clear</button>
+        </div>
 
         <button class="btn" id="clearbtn" name="clearbtn" onclick="clearTable()">Clear filter</button>
     </div>

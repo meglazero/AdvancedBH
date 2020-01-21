@@ -203,7 +203,7 @@ body{
 
         //search button to filter table
         #searchbtn{
-            height: 50px;
+            height: auto;
             color: rgb(28, 223, 158);
             border: 2px solid;
             margin: 0 5px;
@@ -212,7 +212,7 @@ body{
         //clear button to reset table
         #clearbtn{
             margin-left: auto;
-            height: 50px;
+            height: auto;
             color: #e06737;
             border: 2px solid;
         }
@@ -222,6 +222,88 @@ body{
             margin: auto 0;
             padding: 0 5px;
             color: rgb(28, 223, 158);
+        }
+
+        #checkboxes{
+            display: grid;
+            grid-template-rows: auto auto;
+            margin-left: 50px;
+            padding: 2px;
+            border: dashed 1px rgb(28, 223, 158); 
+
+            .common{
+                grid-row: 1;
+                border: solid 3px #9CE5B6;
+                display: flex;
+                padding: 1px 4px;
+                margin: 1px 2px;
+                width: 130px;
+                #common{
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            .rare{
+                grid-row: 1;
+                border: solid 3px #8687E1;
+                display: flex;
+                padding: 1px 4px;
+                margin: 1px 2px;
+                width: 130px;
+                #rare{
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            .epic{
+                grid-row: 1;
+                border: solid 3px #FC7E77;
+                display: flex;
+                padding: 1px 4px;
+                margin: 1px 2px;
+                width: 130px;
+                #epic{
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            .legendary{
+                grid-row: 2;
+                border: solid 3px #F7F72A;
+                display: flex;
+                padding: 1px 4px;
+                margin: 1px 2px;
+                width: 130px;
+                #legendary{
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            .mythic{
+                grid-row: 2;
+                border: solid 3px #E4094A;
+                display: flex;
+                padding: 1px 4px;
+                margin: 1px 2px;
+                width: 130px;
+                #mythic{
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            .btn{
+                width: auto;
+                height: auto;
+                color: #4faeec;
+                padding: 1px 4px;
+                margin: 1px 2px;
+                border: 3px solid;
+            }
         }
     }
     

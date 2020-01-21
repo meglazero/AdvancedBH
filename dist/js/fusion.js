@@ -3,10 +3,12 @@ const closest = 'Damage closest';
 const target = 'Damage target';
 const closest2 = 'Damage closest 2';
 const furthest = 'Damage furthest 2';
-const drainclose = 'Drain closest';
+const drainClose = 'Drain closest';
+const drainAll = 'Drain all';
 const weakest = 'Damage weakest';
 const all = 'Damage all';
-const healt = 'Heal target';
+const healT = 'Heal target';
+const healS = 'Spread heal';
 //
 
 //sets up template and table to output information to from fusions objects
@@ -16,8 +18,22 @@ const fusionTable = document.querySelector('#fusions');
 //set search variables
 const searchMode = document.querySelector('#search');
 const searchBar = document.querySelector('#searchbar');
+const bonusBar = document.querySelector('.searchbar');
 const bonusBox = document.querySelector('.bonus');
 const bonusSearch = document.querySelector('#bonusSearch');
+const commonSelector = document.querySelector('#commonCheck');
+const rareSelector = document.querySelector('#rareCheck');
+const epicSelector = document.querySelector('#epicCheck');
+const legendarySelector = document.querySelector('#legendaryCheck');
+const mythicSelector = document.querySelector('#mythicCheck');
+// let commonFilter = false;
+// let rareFilter = false;
+// let epicFilter = false;
+// let legendaryFilter = false;
+// let mythicFilter = false;
+let filterCheck = [commonSelector, rareSelector, epicSelector, legendarySelector, mythicSelector];
+let rarityFilter = [];
+let raritySearch = false;
 const filteredFusions = [];
 
 const alphanum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -30,15 +46,15 @@ function genFusions(element) {
     //selects entire fusion group info and updates color based on fusion rarity
     const fusionGroup = fusionElement.querySelector('#fusionTable');
     if (element.rarity == 'common') {
-        fusionGroup.style.backgroundColor = '#97FF7D';
+        fusionGroup.style.backgroundColor = '#9CE5B6';
     } else if (element.rarity == 'rare') {
-        fusionGroup.style.backgroundColor = '#939EF4';
+        fusionGroup.style.backgroundColor = '#8687E1';
     } else if (element.rarity == 'epic') {
-        fusionGroup.style.backgroundColor = '#FF807D';
+        fusionGroup.style.backgroundColor = '#FC7E77';
     } else if (element.rarity == 'legendary') {
-        fusionGroup.style.backgroundColor = '#FFFF00';
+        fusionGroup.style.backgroundColor = '#F7F72A';
     } else if (element.rarity == 'mythic') {
-        fusionGroup.style.backgroundColor = '#FF00AE';
+        fusionGroup.style.backgroundColor = '#E4094A';
     }
 
     //from here to appendchild pulls individual div targets and places info from fusion object
@@ -126,6 +142,12 @@ function genFusions(element) {
     fusionTable.appendChild(fusionElement);
 };
 
+function clearChecks(){
+    filterCheck.forEach(element => {
+        element.checked = false;
+    });
+}
+
     //checks whether search mode is in bonus stat or name and adjuts visibility as needed
 function modeCheck(){
     if(searchMode.value == 'bonus'){
@@ -183,8 +205,20 @@ function removeNonAlphanum(arr){
     //#searchbar info in column depending on #search setting, clear tables and
     //update with only familiars that match
 function search(){
+    if(commonSelector.checked || 
+        rareSelector.checked || 
+        epicSelector.checked || 
+        legendarySelector.checked || 
+        mythicSelector.checked){
+        filterCheck.forEach(element => {
+            if(element.checked == true){
+                rarityFilter.push(element.value);
+            }
+        });
+        raritySearch = true;
+    }
     //if there is a value entered in searchbar
-    if(searchBar.value != ''){
+    if(searchBar.value != '' || bonusBar != ''){
         //if mode selector is bonus
         if(searchMode.value == 'bonus'){
             //check each fusion
@@ -194,10 +228,18 @@ function search(){
                 const b1 = element.bonus1.toLowerCase();
                 const b2 = element.bonus2.toLowerCase();
 
+                if(raritySearch == false){
                 //if the searchbar is equal to either bonusstat
-                if(bLower == b1 || bLower == b2){
-                    //push fusion to gen array
-                    filteredFusions.push(element);
+                    if(bLower == b1 || bLower == b2){
+                        //push fusion to gen array
+                        filteredFusions.push(element);
+                    }
+                }else{
+                    rarityFilter.forEach(rarity => {
+                        if(element.rarity == rarity && (bLower == b1 || bLower == b2)){
+                            filteredFusions.push(element);
+                        }
+                    });
                 }
             });
         }
@@ -239,8 +281,18 @@ function search(){
                         return;
                         }
                     }
-                    //if loop completes, all cells match, push fusion to gen array
-                    filteredFusions.push(element);
+                    if(raritySearch == false){
+                        //if loop completes, all cells match, push fusion to gen array
+                        filteredFusions.push(element);
+                    }else if(raritySearch == true){
+                        rarityFilter.forEach(rarity => {
+                            if(element.rarity == rarity){
+                                filteredFusions.push(element);
+                            }else{
+                                return;
+                            }
+                        });
+                    }
                 }else if(v.includes('*')){
                     //wildcard search prior to text to search for partial names
 
@@ -264,9 +316,22 @@ function search(){
                             } else if(j == iv.length-1 && i == n.length-1 && n[i] == iv[j]){
                                     //check if fusion name item equals query item j
                                         //if so, push fusion to gen array and reset j
+                                        if(raritySearch == false){
                                         filteredFusions.push(element);
                                         j=0;
                                         return;
+                                        }else if(raritySearch == true){
+                                            rarityFilter.forEach(rarity => {
+                                                if(element.rarity == rarity){
+                                                    filteredFusions.push(element);
+                                                    j=0;
+                                                    return;
+                                                }else{
+                                                    j=0;
+                                                    return;
+                                                }
+                                            });
+                                        }
                             }else{
                                 //if not at the end of the name, reset j
                                 j = 0;
@@ -283,8 +348,18 @@ function search(){
                                 return;
                             //else if query item equals fusion name item and i equals length -2
                             }else if(iv[i] == n[i] && i == iv.length-1) {
+                                if(raritySearch == false){
                                 //push fusion to gen array
                                 filteredFusions.push(element);
+                                }else{
+                                    rarityFilter.forEach(rarity => {
+                                        if(element.rarity == rarity){
+                                            filteredFusions.push(element);
+                                        }else{
+                                            return;
+                                        }
+                                    });
+                                }
                             }
                         }
                     }
@@ -302,7 +377,9 @@ function search(){
     
     //error checking if no familiars found
     if(filteredFusions.length == 0){
-        console.log('Search returned no result');
+        alert('Search returned no result');
+        rarityFilter = [];
+        raritySearch = false;
     }else{
         //clears existing table
         fusionGroups.forEach(element => {
@@ -319,8 +396,10 @@ function search(){
         for (let i = 0; i < ff; i++) {
             filteredFusions.shift();
         };
-    }
 
+        rarityFilter = [];
+        raritySearch = false;
+    }
 };
 
 //full list of fusions
@@ -362,7 +441,7 @@ const fusions = [
         tar1: closest,
         dam1: '90-110%',
         atk2: 'Feast (2 SP)',
-        tar2: drainclose,
+        tar2: drainClose,
         dam2: '80-120%',
         rarity: 'common',
         source: 'dungeon',
@@ -614,7 +693,7 @@ const fusions = [
         tar1: closest,
         dam1: '90-110%',
         atk2: 'Cleanse (2 SP)',
-        tar2: healt,
+        tar2: healT,
         dam2: '88-132%',
         rarity: 'common',
         source: 'dungeon',
@@ -664,15 +743,93 @@ const fusions = [
     },
 
     //------------- RARE DUNGEON -------------//
-
+    {
+        image: 'url("dist/imgs/bubbo.png")',
+        name: 'Bubbo',
+        perc1: '15% ',
+        bonus1: 'Life Steal',
+        perc2: '',
+        bonus2: '',
+        fusedFams: 'Tubbo + Batty',
+        atk: '20%',
+        hp: '37.5%',
+        agi: '17.5%',
+        atk1: 'Attack (0 SP)',
+        tar1: closest,
+        dam1: '90-110%',
+        atk2: 'Reaping (2 SP)',
+        tar2: drainAll,
+        dam2: '28-52%',
+        atk3: 'Isolate (3 SP)',
+        tar3: furthest,
+        dam3: '157.2-366.8%',
+        rarity: 'rare',
+        source: 'dungeon',
+        specSource: 'Z1D1',
+    },
 
     //------------- EPIC DUNGEON -------------//
-
+    {
+        image: 'url("dist/imgs/pengz.png")',
+        name: 'Pengz',
+        perc1: '22.5% ',
+        bonus1: 'Speed',
+        perc2: '',
+        bonus2: '',
+        fusedFams: 'Pengey + Grimz',
+        atk: '25.5%',
+        hp: '24.1%',
+        agi: '35.4%',
+        atk1: 'Attack (0 SP)',
+        tar1: closest,
+        dam1: '90-110%',
+        atk2: 'Death Touch (1 SP)',
+        tar2: drainClose,
+        dam2: '52.5-97.5%',
+        atk3: 'Cold Heal (2 SP)',
+        tar3: healT,
+        dam3: '88-132%',
+        atk4: 'Scythe Swipe (3 SP)',
+        tar4: all,
+        dam4: '60-140%',
+        rarity: 'epic',
+        source: 'dungeon',
+        specSource: 'Z2D1, Z1D1',
+    },
 
     //------------- LEGENDARY DUNGEON -------------//
+    {
+        image: 'url("dist/imgs/robby.png")',
+        name: 'Robby',
+        perc1: '60% ',
+        bonus1: 'Crit Chance',
+        perc2: '',
+        bonus2: '',
+        fusedFams: 'Gobby + 5 Robot Sprocket',
+        atk: '37%',
+        hp: '26.3%',
+        agi: '31.7%',
+        atk1: 'Attack (0 SP)',
+        tar1: closest,
+        dam1: '90-110%',
+        atk2: 'Terra Punch (1 SP)',
+        tar2: closest,
+        dam2: '137.6-206.4%',
+        atk3: 'Shockwave (1 SP)',
+        tar3: all,
+        dam3: '48-72%',
+        atk4: 'Recharge (2 SP)',
+        tar4: healS,
+        dam4: '96-144%',
+        atk5: 'Rocket Punch (2 SP)',
+        tar5: target,
+        dam5: '144-216%',
+        rarity: 'legendary',
+        source: 'dungeon',
+        specSource: 'Any zone any dungeon',
+    },
 
-
-    //------------- COMMONS DUNGEON -------------//
+    //------------- MYTHIC DUNGEON -------------//
     {
         image: 'url("dist/imgs/rombolio.png")',
         name: 'Rombolio',
@@ -694,7 +851,7 @@ const fusions = [
         tar3: weakest,
         dam3: '85.2-198.8%',
         atk4: 'Feast (1 SP)',
-        tar4: drainclose,
+        tar4: drainClose,
         dam4: '45-105%',
         atk5: 'Inspire (2 SP)',
         tar5: 'Spread heal',
