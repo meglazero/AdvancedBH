@@ -211,57 +211,21 @@ function genFusions(element) {
         }
     } else if(element.brain != undefined){
         if(element.perc4 != undefined){
-            if( element.bonus4 == 'Dmg' || element.bonus4 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4 +  ', ' + element.brain;
-            }else if(element.bonus3 == 'Dmg' || element.bonus3 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4  + ', ' + element.brain;
-            } else if(element.bonus2 == 'Dmg' || element.bonus2 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4  + ', ' + element.brain;
-            } else if(element.bonus1 == 'Dmg' || element.bonus1 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4  + ', ' + element.brain;
-            }
+            bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4  + ', ' + element.brain;
         } else if(element.perc3 != undefined){
-            if(element.bonus3 == 'Dmg' || element.bonus3 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.brain;
-            } else if(element.bonus2 == 'Dmg' || element.bonus2 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.brain;
-            } else if(element.bonus1 == 'Dmg' || element.bonus1 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.brain;
-            }
+            bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.brain;
         } else if(element.perc2 != undefined){
-            if(element.bonus2 == 'Dmg' || element.bonus2 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.brain;
-            } else if(element.bonus1 == 'Dmg' || element.bonus1 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.brain;
-            }
+            bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.brain;
         } else{
             bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.brain;
         }
     } else {
         if(element.perc4 != undefined){
-            if( element.bonus4 == 'Dmg' || element.bonus4 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4;
-            }else if(element.bonus3 == 'Dmg' || element.bonus3 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4;
-            } else if(element.bonus2 == 'Dmg' || element.bonus2 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4;
-            } else if(element.bonus1 == 'Dmg' || element.bonus1 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4;
-            }
+            bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3 + ', ' + element.perc4 + element.bonus4;
         } else if(element.perc3 != undefined){
-            if(element.bonus3 == 'Dmg' || element.bonus3 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3;
-            } else if(element.bonus2 == 'Dmg' || element.bonus2 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3;
-            } else if(element.bonus1 == 'Dmg' || element.bonus1 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3;
-            }
+            bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3;
         } else if(element.perc2 != undefined){
-            if(element.bonus2 == 'Dmg' || element.bonus2 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2;
-            } else if(element.bonus1 == 'Dmg' || element.bonus1 == 'Resistance'){
-                bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2;
-            }
+            bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2;
         } else{
             bonusStat.textContent = element.perc1 + element.bonus1;
         }
