@@ -142,6 +142,7 @@ function genFusions(element) {
     skill6.textContent = element.atk6;
 
     const bonusStat = fusionElement.querySelector('#bonusStat');
+
     //if fusion has more than 1 bonus stat display both with spacing, else display one
 
     //giant block of if else statements to work down if fusions have element, brain, and 4-1 bonus stats
@@ -266,34 +267,6 @@ function genFusions(element) {
         }
     }
 
-
-
-
-    // if(element.eleDmg == undefined){
-    //     if(element.perc3 != ''){
-    //         bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2 + ', ' + element.perc3 + element.bonus3;
-    //     }
-    //     if(element.perc2 == ''){
-    //         bonusStat.textContent = element.perc1 + element.bonus1;
-    //     } else if(element.perc2 != ''){
-    //         bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2;
-    //     }
-    // } else if(element.bonus1 == 'Dmg' || element.bonus1 == 'Resistance'){
-    //     if(element.perc2 == ''){
-    //         bonusStat.textContent = element.perc1 + element.eleDmg + element.bonus1;
-    //     } else if(element.perc2 != ''){
-    //         bonusStat.textContent = element.perc1 + element.eleDmg + element.bonus1 + ', ' + element.perc2 + element.bonus2;
-    //     }
-    // } else if(element.bonus2 == 'Dmg' || element.bonus2 == 'Resistance'){
-    //         bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.eleDmg + element.bonus2;
-    // } else {
-    //     if(element.perc2 == ''){
-    //         bonusStat.textContent = element.perc1 + element.bonus1;
-    //     } else if(element.perc2 != ''){
-    //         bonusStat.textContent = element.perc1 + element.bonus1 + ', ' + element.perc2 + element.bonus2;
-    //     }
-    // }
-
     const hpValue = fusionElement.querySelector('#hpValue');
     hpValue.textContent = element.hp;
 
@@ -395,12 +368,6 @@ function genFusions(element) {
     fusionTable.appendChild(fusionElement);
 };
 
-function clearChecks(){
-    filterCheck.forEach(element => {
-        element.checked = false;
-    });
-}
-
     //checks whether search mode is in bonus stat or name and adjuts visibility as needed
 function modeCheck(){
     if(searchMode.value == 'bonus'){
@@ -426,6 +393,15 @@ function clearTable(){
     //run through and gen all fusions
     fusions.forEach(element => {
         genFusions(element);
+    });
+};
+
+function clearChecks(){
+    if(searchBar.value != '' || bonusBar.value != ''){
+        clearTable();
+    }
+    filterCheck.forEach(element => {
+        element.checked = false;
     });
 };
 
@@ -471,7 +447,9 @@ function search(){
         raritySearch = true;
     }
     //if there is a value entered in searchbar
-    if(searchBar.value != '' || bonusBar != ''){
+    if(searchBar.value != '' || bonusBar.value != ''){
+        console.log(searchBar.value)
+        console.log(bonusBar)
         //if mode selector is bonus
         if(searchMode.value == 'bonus'){
             //check each fusion
@@ -623,6 +601,14 @@ function search(){
                 
             });
         }
+    }else if(raritySearch == true){
+            fusions.forEach(element => {
+            rarityFilter.forEach(rarity => {
+                if(element.rarity == rarity){
+                    filteredFusions.push(element);
+                }
+            })
+        })
     };
     
     //creates array for total list to remove
@@ -657,30 +643,9 @@ function search(){
 
 //full list of fusions
 const fusions = [
-    // image: 'url("dist/imgs/prof-gak.png")',
-    // name: 'Prof. Gak',
-    // perc1: '7.5% ',
-    // bonus1: 'Health',
-    // 
-    // 
-    // fusedFams: 'Gak + Prof. Oak',
-    // atk: '20.6%',
-    // hp: '29.3%',
-    // agi: '15.1%',
-    // atk1: 'Attack (0 SP)',
-    // tar1: closest,
-    // dam1: '90-110%',
-    // atk2: 'Slime Cut (2 SP)',
-    // tar2: closest,
-    // dam2: '183.2-274.8%',
-    // rarity: 'common',
-    // source: 'dungeon',
-    // specSource: 'Z2D2, Z1D2',
-
     //#region //------------- COMMONS DUNGEON -------------//√
-    {
+    {   name: 'Prof. Gak',
         image: 'url("dist/imgs/prof. gak.png")',
-        name: 'Prof. Gak',
         perc1: '7.5% ',
         bonus1: 'Health',
         fusedFams: 'Gak + Prof. Oak',
@@ -697,9 +662,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D2, Z1D2',
     },
-    {
+    {   name: 'Booty',
         image: 'url("dist/imgs/booty.png")',
-        name: 'Booty',
         perc1: '7.5% ',
         bonus1: 'Life Steal',
         fusedFams: 'BooBoo + Batty',
@@ -716,9 +680,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D1, Z1D1',
     },
-    {
+    {   name: 'Narchie',
         image: 'url("dist/imgs/narchie.png")',
-        name: 'Narchie',
         perc1: '7.5% ',
         bonus1: 'Speed',
         fusedFams: 'Archie + Naginee',
@@ -735,9 +698,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D3, Z3D1',
     },
-    {
+    {   name: 'Jugg',
         image: 'url("dist/imgs/jugg.png")',
-        name: 'Jugg',
         perc1: '15% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Sugg + Juice',
@@ -754,9 +716,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D2, Z3D3',
     },
-    {
+    {   name: 'Krives',
         image: 'url("dist/imgs/krives.png")',
-        name: 'Krives',
         perc1: '7.5% ',
         bonus1: 'Damage',
         fusedFams: 'Krusty + Ives',
@@ -773,9 +734,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D3, Z3D1',
     },
-    {
+    {   name: 'Naukmo',
         image: 'url("dist/imgs/naukmo.png")',
-        name: 'Naukmo',
         perc1: '7.5% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Baumo + Nock',
@@ -792,9 +752,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D1, Z3D3',
     },
-    {
+    {   name: "Es'Skelegro",
         image: 'url("dist/imgs/esskelegro.png")',
-        name: "Es'Skelegro",
         perc1: '7.5% ',
         bonus1: 'Damage Enrage',
         fusedFams: "Es'Skeleto + 2 Jumbo Syrum",
@@ -811,9 +770,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D3',
     },
-    {
+    {   name: 'Grolum',
         image: 'url("dist/imgs/grolum.png")',
-        name: 'Grolum',
         perc1: '15% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Golum + 2 Jumbo Syrum',
@@ -830,9 +788,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D3',
     },
-    {
+    {   name: 'Zammy',
         image: 'url("dist/imgs/zammy.png")',
-        name: 'Zammy',
         perc1: '7.5% ',
         bonus1: 'Speed',
         fusedFams: 'Sammy + 2 Mini Syrum',
@@ -849,9 +806,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D2',
     },
-    {
+    {   name: 'Saerugg',
         image: 'url("dist/imgs/saerugg.png")',
-        name: 'Saerugg',
         perc1: '15% ',
         bonus1: 'Block Chance',
         fusedFams: 'Saerebrum + Uggs',
@@ -868,9 +824,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D2, Z4D1',
     },
-    {
+    {   name: 'Asst. Oak',
         image: 'url("dist/imgs/asst. oak.png")',
-        name: 'Asst. Oak',
         perc1: '4.5% ',
         bonus1: 'Deflect Chance',
         fusedFams: 'Prof. Oak + 2 Mini Syrum',
@@ -887,9 +842,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D2',
     },
-    {
+    {   name: 'Immyt',
         image: 'url("dist/imgs/immyt.png")',
-        name: 'Immyt',
         perc1: '7.5% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Emmyt + 2 Mini Syrum',
@@ -906,9 +860,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z5D1',
     },
-    {
+    {   name: 'Bummih',
         image: 'url("dist/imgs/bummih.png")',
-        name: 'Bummih',
         perc1: '7.5% ',
         bonus1: 'Dual Strike',
         fusedFams: 'Mummih + 2 Jumbo Syrum',
@@ -925,9 +878,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z5D3',
     },
-    {
+    {   name: 'Vickoo',
         image: 'url("dist/imgs/vickoo.png")',
-        name: 'Vickoo',
         perc1: '7.5% ',
         bonus1: 'Dual Strike',
         fusedFams: 'BooBoo + Vicky',
@@ -944,9 +896,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D1, Z7D1',
     },
-    {
+    {   name: 'Saerebrumark',
         image: 'url("dist/imgs/saerebrumark.png")',
-        name: 'Saerebrumark',
         perc1: '7.5% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Saerebrum + Samark',
@@ -963,9 +914,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D2, Z10D2',
     },
-    {
+    {   name: 'Gorce',
         image: 'url("dist/imgs/gorce.png")',
-        name: 'Gorce',
         perc1: '7.5% ',
         bonus1: 'Damage',
         fusedFams: 'Golum + Chilro',
@@ -982,9 +932,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D3, Z10D3',
     },
-    {
+    {   name: 'Andie',
         image: 'url("dist/imgs/andie.png")',
-        name: 'Andie',
         eleDmg: 'Electric ',
         perc1: '5% ',
         bonus1: 'Dmg',
@@ -1004,9 +953,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D3, Z6D1',
     },
-    {
+    {   name: 'Hakcax',
         image: 'url("dist/imgs/hakcax.png")',
-        name: 'Hakcax',
         eleDmg: 'Fire ',
         perc1: '5% ',
         bonus1: 'Dmg',
@@ -1029,9 +977,8 @@ const fusions = [
     //#endregion
 
     //#region //------------- RARE DUNGEON -------------//√
-    {
+    {   name: 'Bubbo',
         image: 'url("dist/imgs/bubbo.png")',
-        name: 'Bubbo',
         perc1: '15% ',
         bonus1: 'Life Steal',
         fusedFams: 'Tubbo + Batty',
@@ -1051,9 +998,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D1',
     },
-    {
+    {   name: 'Melvinsteins',
         image: 'url("dist/imgs/melvinsteins.png")',
-        name: 'Melvinsteins',
         perc1: '15% ',
         bonus1: 'Speed',
         fusedFams: 'Melvins + McGobblestein',
@@ -1073,9 +1019,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D2, Z2D1',
     },
-    {
+    {   name: 'Shrampz',
         image: 'url("dist/imgs/shrampz.png")',
-        name: 'Shrampz',
         perc1: '30% ',
         bonus1: 'Block Chance',
         fusedFams: 'Grampz + Shrump',
@@ -1095,9 +1040,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D2, Z1D2',
     },
-    {
+    {   name: "Bor'lan",
         image: 'url("dist/imgs/borlan.png")',
-        name: "Bor'lan",
         perc1: '15% ',
         bonus1: 'Damage',
         fusedFams: "Mer'lan + Bob",
@@ -1117,9 +1061,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D3, Z1D2',
     },
-    {
+    {   name: 'Rina',
         image: 'url("dist/imgs/rina.png")',
-        name: 'Rina',
         perc1: '15% ',
         bonus1: 'Damage Enrage',
         fusedFams: 'Dina + 1 Robot Sprocket',
@@ -1139,9 +1082,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D1',
     },
-    {
+    {   name: 'Mr. Bob',
         image: 'url("dist/imgs/mr. bob.png")',
-        name: 'Mr. Bob',
         perc1: '15% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Mr. Wasson + Bob',
@@ -1161,9 +1103,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D2, Z1D2',
     },
-    {
+    {   name: "Na'Man",
         image: 'url("dist/imgs/naman.png")',
-        name: "Na'Man",
         perc1: '30% ',
         bonus1: 'Crit Chance',
         fusedFams: "Neila + Sha'Man",
@@ -1183,9 +1124,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D2, Z2D3',
     },
-    {
+    {   name: 'Dillzilla',
         image: 'url("dist/imgs/dillzilla.png")',
-        name: 'Dillzilla',
         perc1: '15% ',
         bonus1: 'Health',
         fusedFams: 'Rills + Dina',
@@ -1205,9 +1145,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D3, Z3D1',
     },
-    {
+    {   name: 'Grengey',
         image: 'url("dist/imgs/grengey.png")',
-        name: 'Grengey',
         perc1: '150% ',
         bonus1: 'Crit Damage',
         fusedFams: 'Pengey + 6 Jumbo Syrum',
@@ -1227,9 +1166,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D1',
     },
-    {
+    {   name: 'Patcho',
         image: 'url("dist/imgs/patcho.png")',
-        name: 'Patcho',
         perc1: '15% ',
         bonus1: 'Damage',
         fusedFams: 'Patches + 6 Jumbo Syrum',
@@ -1249,9 +1187,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D2',
     },
-    {
+    {   name: 'Zirg',
         image: 'url("dist/imgs/zirg.png")',
-        name: 'Zirg',
         perc1: '15% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Zorg + 6 Mini Syrum',
@@ -1271,9 +1208,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D3',
     },
-    {
+    {   name: 'Stasson',
         image: 'url("dist/imgs/stasson.png")',
-        name: 'Stasson',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Staeus + Mr. Wasson',
@@ -1293,9 +1229,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D3, Z3D2',
     },
-    {
+    {   name: 'Terrump',
         image: 'url("dist/imgs/terrump.png")',
-        name: 'Terrump',
         perc1: '15% ',
         bonus1: 'Life Steal',
         fusedFams: 'Terra + Shrump',
@@ -1315,9 +1250,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D1, Z1D2',
     },
-    {
+    {   name: 'Junior',
         image: 'url("dist/imgs/junior.png")',
-        name: 'Junior',
         perc1: '15% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Grampz + 6 Mini Syrum',
@@ -1337,9 +1271,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D2',
     },
-    {
+    {   name: 'Itra',
         image: 'url("dist/imgs/itra.png")',
-        name: 'Itra',
         perc1: '15% ',
         bonus1: 'Life Steal',
         fusedFams: 'Sitra + 6 Mini Syrum',
@@ -1359,9 +1292,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z5D3',
     },
-    {
+    {   name: "Melv'goon",
         image: 'url("dist/imgs/melvgoon.png")',
-        name: "Melv'goon",
         perc1: '15% ',
         bonus1: 'Speed',
         fusedFams: "Melv'guin + 6 Jumbo Syrum",
@@ -1381,9 +1313,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z5D2',
     },
-    {
+    {   name: 'Bebeguin',
         image: 'url("dist/imgs/bebeguin.png")',
-        name: 'Bebeguin',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         fusedFams: "Melv'guin + Bebemenz",
@@ -1403,9 +1334,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z5D2, Z5D1',
     },
-    {
+    {   name: 'Mummite',
         image: 'url("dist/imgs/mummite.png")',
-        name: 'Mummite',
         perc1: '9% ',
         bonus1: 'Deflect Chance',
         fusedFams: 'Brute + Mummih',
@@ -1425,9 +1355,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z5D3',
     },
-    {
+    {   name: 'Dropo',
         image: 'url("dist/imgs/dropo.png")',
-        name: 'Dropo',
         perc1: '15% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Drogginz + Opo',
@@ -1447,9 +1376,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z6D1, Z6D2',
     },
-    {
+    {   name: 'Stuvin',
         image: 'url("dist/imgs/stuvin.png")',
-        name: 'Stuvin',
         perc1: '15% ',
         bonus1: 'Damage',
         fusedFams: 'Stumpie + Marvin',
@@ -1469,9 +1397,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z6D2, Z6D1',
     },
-    {
+    {   name: 'Zingo',
         image: 'url("dist/imgs/zingo.png")',
-        name: 'Zingo',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Wingo + 6 Jumbo Syrum',
@@ -1491,9 +1418,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z6D1',
     },
-    {
+    {   name: 'Polich',
         image: 'url("dist/imgs/polich.png")',
-        name: 'Polich',
         perc1: '15% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Poke + Cramlich Force',
@@ -1513,9 +1439,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z7D1',
     },
-    {
+    {   name: 'Brimber',
         image: 'url("dist/imgs/brimber.png")',
-        name: 'Brimber',
         perc1: '15% ',
         bonus1: 'Speed',
         fusedFams: 'Brimby + 6 Jumbo Syrum',
@@ -1535,9 +1460,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z7D2',
     },
-    {
+    {   name: 'Flurttlez',
         image: 'url("dist/imgs/flurttlez.png")',
-        name: 'Flurttlez',
         perc1: '30% ',
         bonus1: 'Block Chance',
         fusedFams: 'Flurgie + Scuttlez',
@@ -1557,9 +1481,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z8D1',
     },
-    {
+    {   name: 'Findlin',
         image: 'url("dist/imgs/findlin.png")',
-        name: 'Findlin',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         fusedFams: 'Findle + Trelpin',
@@ -1579,9 +1502,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z8D2, Z8D1',
     },
-    {
+    {   name: 'Bnigmane',
         image: 'url("dist/imgs/bnigmane.png")',
-        name: 'Bnigmane',
         perc1: '9% ',
         bonus1: 'Deflect Chance',
         fusedFams: 'Blori + Knigmane',
@@ -1601,9 +1523,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z10D2, Z10D1',
     },
-    {
+    {   name: 'Saevin',
         image: 'url("dist/imgs/saevin.png")',
-        name: 'Saevin',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         fusedFams: '5 Samark + 5 Menvin',
@@ -1623,9 +1544,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z10D2, Z10D1',
     },
-    {
+    {   name: 'Ishirzee',
         image: 'url(dist/imgs/ishirzee.png)',
-        name: 'Ishirzee',
         eleDmg: 'Water ',
         perc1: '5% ',
         bonus1: 'Resistance',
@@ -1648,9 +1568,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z10D2, Z5D2',
     },
-    {
+    {   name: 'Leitridh',
         image: 'url(dist/imgs/leitridh.png)',
-        name: 'Leitridh',
         eleDmg: 'Earth ',
         perc1: '5% ',
         bonus1: 'Resistance',
@@ -1676,9 +1595,8 @@ const fusions = [
     //#endregion
 
     //#region //--------------- RARE WB ----------------//√
-    {
+    {   name: 'Drek',
         image: 'url("dist/imgs/drek.png")',
-        name: 'Drek',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         fusedFams: '6 Golum + 5 Hobbit Foot',
@@ -1698,9 +1616,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z4D3, orlag',
     },
-    {
+    {   name: 'Tilge',
         image: 'url("dist/imgs/tilge.png")',
-        name: 'Tilge',
         perc1: '15% ',
         bonus1: 'Empower Chance',
         fusedFams: '6 Archie + 5 Hobbit Foot',
@@ -1720,9 +1637,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z2D3, orlag',
     },
-    {
+    {   name: 'Ergos',
         image: 'url("dist/imgs/ergos.png")',
-        name: 'Ergos',
         perc1: '30% ',
         bonus1: 'Block Chance',
         fusedFams: '6 Prof. Oak + 5 Demon Juice',
@@ -1742,9 +1658,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z1D2, nether',
     },
-    {
+    {   name: 'Jormund',
         image: 'url("dist/imgs/jormund.png")',
-        name: 'Jormund',
         perc1: '15% ',
         bonus1: 'Damage Reduction',
         fusedFams: '5 Naginee + 5 Scarlag Skin',
@@ -1764,9 +1679,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z3D1, brimstone',
     },
-    {
+    {   name: 'Melakir',
         image: 'url("dist/imgs/melakir.png")',
-        name: 'Melakir',
         perc1: '12.5% ',
         bonus1: 'Damage',
         perc2: '2.5% ',
@@ -1788,9 +1702,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z4D1, brimstone',
     },
-    {
+    {   name: 'Crius',
         image: 'url("dist/imgs/crius.png")',
-        name: 'Crius',
         eleDmg: 'Water ',
         perc1: '25% ',
         bonus1: 'Crit Chance',
@@ -1813,9 +1726,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z4D2, Z10D2, titan',
     },
-    {
+    {   name: 'Coralus',
         image: 'url("dist/imgs/coralus.png")',
-        name: 'Coralus',
         eleDmg: 'Water ',
         perc1: '25% ',
         bonus1: 'Block Chance',
@@ -1841,9 +1753,8 @@ const fusions = [
     //#endregion
 
     //#region //------------- RARE INVASION -------------//√
-    {
+    {   name: 'Gozum',
         image: 'url("dist/imgs/gozum.png")',
-        name: 'Gozum',
         perc1: '7.5% ',
         bonus1: 'Damage',
         perc2: '7.5% ',
@@ -1865,9 +1776,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z4D3, zombo',
     },
-    {
+    {   name: 'Coza',
         image: 'url("dist/imgs/coza.png")',
-        name: 'Coza',
         perc1: '15% ',
         bonus1: 'Crit Chance',
         perc2: '7.5% ',
@@ -1889,9 +1799,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z5D2, zombo',
     },
-    {
+    {   name: 'Zoak',
         image: 'url("dist/imgs/zoak.png")',
-        name: 'Zoak',
         perc1: '7.5% ',
         bonus1: 'Evade Chance',
         perc2: '7.5% ',
@@ -1913,9 +1822,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z1D2, zombo',
     },
-    {
+    {   name: 'Ninjih',
         image: 'url("dist/imgs/ninjih.png")',
-        name: 'Ninjih',
         perc1: '15% ',
         bonus1: 'Crit Chance',
         perc2: '7.5% ',
@@ -1937,9 +1845,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z5D3, ninja',
     },
-    {
+    {   name: 'Iva',
         image: 'url("dist/imgs/iva.png")',
-        name: 'Iva',
         perc1: '7.5% ',
         bonus1: 'Damage Reduction',
         perc2: '7.5% ',
@@ -1961,9 +1868,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z3D1, ninja',
     },
-    {
+    {   name: 'Trigginz',
         image: 'url("dist/imgs/trigginz.png")',
-        name: 'Trigginz',
         perc1: '9% ',
         bonus1: 'Deflect Chance',
         fusedFams: '5 Drogginz + 50 Ginger Snaps',
@@ -1983,9 +1889,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z6D1, holiday',
     },
-    {
+    {   name: 'Tinsel',
         image: 'url("dist/imgs/tinsel.png")',
-        name: 'Tinsel',
         perc1: '15% ',
         bonus1: 'Damage',
         fusedFams: '5 Stumpie + 50 Ginger Snaps',
@@ -2005,9 +1910,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z6D2, holiday',
     },
-    {
+    {   name: 'Wellon',
         image: 'url("dist/imgs/wellon.png")',
-        name: 'Wellon',
         perc1: '15% ',
         bonus1: 'Damage Reduction',
         fusedFams: '5 Mr. Wasson + 50 Jelly Donut',
@@ -2027,9 +1931,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z3D2, jelly',
     },
-    {
+    {   name: 'Popsi Twins',
         image: 'url("dist/imgs/popsi twins.png")',
-        name: 'Popsi Twins',
         perc1: '15% ',
         bonus1: 'Speed',
         fusedFams: '5 CandelaBros + 50 Croutons',
@@ -2049,9 +1952,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z8D2, papoz',
     },
-    {
+    {   name: 'Stenon',
         image: 'url("dist/imgs/stenon.png")',
-        name: 'Stenon',
         perc1: '15% ',
         bonus1: 'Damage',
         fusedFams: '5 Conan + 50 Croutons',
@@ -2071,9 +1973,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z5D2, papoz',
     },
-    {
+    {   name: 'Prof Broccoli',
         image: 'url("dist/imgs/prof broccoli.png")',
-        name: 'Prof Broccoli',
         perc1: '7.5% ',
         bonus1: 'Absorb Chance',
         fusedFams: '5 Prof. Oak + 50 Croutons',
@@ -2093,9 +1994,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z1D2, papoz',
     },
-    {
+    {   name: 'Wargomyt',
         image: 'url("dist/imgs/wargomyt.png")',
-        name: 'Wargomyt',
         perc1: '16% ',
         bonus1: 'Health',
         fusedFams: '5 Emmyt + 50 Feastum',
@@ -2115,9 +2015,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z5D1, turkey',
     },
-    {
+    {   name: 'Pytris',
         image: 'url("dist/imgs/pytris.png")',
-        name: 'Pytris',
         perc1: '150% ',
         bonus1: 'Crit Damage',
         fusedFams: '5 Flurgie + 50 Feastum',
@@ -2137,9 +2036,8 @@ const fusions = [
         source: 'invasion',
         specSource: 'Z8D1, turkey',
     },
-    {
+    {   name: 'Thia',
         image: 'url("dist/imgs/thia.png")',
-        name: 'Thia',
         perc1: '15% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Dina + 50 Feastum',
@@ -2162,9 +2060,8 @@ const fusions = [
     //#endregion
 
     //#region //------------- RARE EXPEDITION -------------//√
-    {
+    {   name: 'Robasson',
         image: 'url("dist/imgs/robasson.png")',
-        name: 'Robasson',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         brain: '40% chance to attack weakest enemy for 40.8-61.2% when you hit an enemy',
@@ -2185,9 +2082,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z3D2, raleib',
     },
-    {
+    {   name: 'Saereboo',
         image: 'url("dist/imgs/saereboo.png")',
-        name: 'Saereboo',
         perc1: '7.5% ',
         bonus1: 'Absorb Chance',
         brain: '40% chance to heal team for 17.6-26.4% when you get hit',
@@ -2208,9 +2104,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z4D2, blemo',
     },
-    {
+    {   name: 'Prof. Snack',
         image: 'url("dist/imgs/prof. snack.png")',
-        name: 'Prof. Snack',
         perc1: '9% ',
         bonus1: 'Deflect Chance',
         brain: '40% chance to attack weakest enemy for 40.8-61.2% when you get hit',
@@ -2231,9 +2126,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z1D2, gummy',
     },
-    {
+    {   name: 'Ivub',
         image: 'url("dist/imgs/ivub.png")',
-        name: 'Ivub',
         perc1: '15% ',
         bonus1: 'Speed',
         brain: '40% chance to spread heal for 35.2-52.8% per turn',
@@ -2254,9 +2148,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z3D1, gummy',
     },
-    {
+    {   name: 'The Clouz',
         image: 'url("dist/imgs/the clouz.png")',
-        name: 'The Clouz',
         perc1: '15% ',
         bonus1: 'Damage',
         brain: '40% chance to heal team for 17.6-26.4% per turn',
@@ -2277,9 +2170,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z7D2, googarum',
     },
-    {
+    {   name: 'Candelardoz',
         image: 'url("dist/imgs/candelardoz.png")',
-        name: 'Candelardoz',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         brain: '40% chance to spread shield for 32-48% when you hit an enemy',
@@ -2300,9 +2192,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z8D2, svord',
     },
-    {
+    {   name: 'Duortlez',
         image: 'url("dist/imgs/duortlez.png")',
-        name: 'Duortlez',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         brain: '40% chance to spread heal for 35.2-52.8% when you hit an enemy',
@@ -2323,9 +2214,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z8D1, twimbo',
     },
-    {
+    {   name: 'Harchie',
         image: 'url("dist/imgs/harchie.png")',
-        name: 'Harchie',
         perc1: '15% ',
         bonus1: 'Speed',
         brain: '40% chance to attack weakest enemy for 40.8-61.2% per turn',
@@ -2346,9 +2236,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z2D3, vionot',
     },
-    {
+    {   name: 'Prof Pajama',
         image: 'url("dist/imgs/prof pajama.png")',
-        name: 'Prof Pajama',
         perc1: '15% ',
         bonus1: 'Damage Reduction',
         brain: '40% chance to spread heal and spread shield for 16.8-25.2% when you get hit',
@@ -2369,9 +2258,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z1D2, grampahef',
     },
-    {
+    {   name: 'Drogix',
         image: 'url("dist/imgs/drogix.png")',
-        name: 'Drogix',
         perc1: '7.5% ',
         bonus1: 'Absorb Chance',
         brain: '40% chance to heal team for 17.6-26.4% when you get hit',
@@ -2392,9 +2280,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z6D1, blublix',
     },
-    {
+    {   name: 'Iveki',
         image: 'url("dist/imgs/iveki.png")',
-        name: 'Iveki',
         perc1: '15% ',
         bonus1: 'Damage',
         brain: '40% chance to attack weakest enemy for 40.8-61.2% when you hit an enemy',
@@ -2415,9 +2302,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z3D1, blublix',
     },
-    {
+    {   name: 'Hurgy',
         image: 'url("dist/imgs/hurgy.png")',
-        name: 'Hurgy',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         brain: '40% chance to spread heal and spread shield for 35.2-52.8% when you hit an enemy',
@@ -2438,9 +2324,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z2D2, wizbot',
     },
-    {
+    {   name: 'Emdus',
         image: 'url("dist/imgs/emdus.png")',
-        name: 'Emdus',
         perc1: '15% ',
         bonus1: 'Damage Reduction',
         brain: '40% chance to spread shield for 32-48% when you get hit',
@@ -2461,9 +2346,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z5D1, astamus',
     },
-    {
+    {   name: 'Contan',
         image: 'url("dist/imgs/contan.png")',
-        name: 'Contan',
         perc1: '15% ',
         bonus1: 'Empower Chance',
         brain: '40% chance to spread heal and spread shield for 16.8-25.2% when you hit an enemy',
@@ -2484,9 +2368,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z5D2, astamus',
     },
-    {
+    {   name: 'Krozy',
         image: 'url("dist/imgs/krozy.png")',
-        name: 'Krozy',
         perc1: '17.5% ',
         bonus1: 'Dual Strike',
         fusedFams: '2 Kroger + 50 Kickapick',
@@ -2506,9 +2389,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z5D1, herofest',
     },
-    {
+    {   name: 'Swice',
         image: 'url("dist/imgs/swice.png")',
-        name: 'Swice',
         perc1: '17.5% ',
         bonus1: 'Evade Chance',
         fusedFams: '2 Sitra + 50 Jajajajackpot',
@@ -2528,9 +2410,8 @@ const fusions = [
         source: 'expedition',
         specSource: 'Z5D3, burningfam',
     },
-    {
+    {   name: 'Kr Ty',
         image: 'url("dist/imgs/kr ty.png")',
-        name: 'Kr Ty',
         perc1: '15% ',
         bonus1: 'Empower Chance',
         fusedFams: '2 Krusty + 50 Heyho',
@@ -2553,9 +2434,8 @@ const fusions = [
     //#endregion
 
     //#region //------------- EPIC DUNGEON -------------//√
-    {
+    {   name: 'Pengz',
         image: 'url("dist/imgs/pengz.png")',
-        name: 'Pengz',
         perc1: '22.5% ',
         bonus1: 'Speed',
         fusedFams: 'Pengey + Grimz',
@@ -2578,9 +2458,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D1, Z1D1',
     },
-    {
+    {   name: 'Jemm',
         image: 'url("dist/imgs/jemm.png")',
-        name: 'Jemm',
         perc1: '225% ',
         bonus1: 'Crit Damage',
         fusedFams: 'Jeb + Gemm',
@@ -2603,9 +2482,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D2, Z2D3',
     },
-    {
+    {   name: 'Yobo',
         image: 'url("dist/imgs/yobo.png")',  
-        name: 'Yobo',
         perc1: '45% ',
         bonus1: 'Block Chance',
         fusedFams: 'Yeti + 3 Robot Sprocket',
@@ -2628,9 +2506,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D1',
     },
-    {
+    {   name: "Es'Skeletrad",
         image: 'url("dist/imgs/esskeletrad.png")',
-        name: "Es'Skeletrad",
         perc1: '22.5% ',
         bonus1: 'Damage Enrage',
         fusedFams: "Dryad + Es'Skeleto",
@@ -2653,9 +2530,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D2, Z1D3',
     },
-    {
+    {   name: 'Cuerade',
         image: 'url("dist/imgs/cuerade.png")',
-        name: 'Cuerade',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Shade + Lord Cerulean',
@@ -2678,9 +2554,8 @@ const fusions = [
         source: 'dungeon, raid',
         specSource: 'Z1D3, R1',
     },
-    {
+    {   name: 'Squibbo',
         image: 'url("dist/imgs/squibbo.png")',
-        name: 'Squibbo',
         perc1: '22.5% ',
         bonus1: 'Damage',
         fusedFams: 'Squib + Tubbo',
@@ -2703,9 +2578,8 @@ const fusions = [
         source: 'raid, dungeon',
         specSource: 'R1, Z1D1',
     },
-    {
+    {   name: 'Nosdomdom',
         image: 'url("dist/imgs/nosdomdom.png")',
-        name: 'Nosdomdom',
         perc1: '22.5% ',
         bonus1: 'Damage Enrage',
         fusedFams: 'Nosdoodoo + Bromm',
@@ -2728,9 +2602,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D1, Z2D3',
     },
-    {
+    {   name: 'Quirk',
         image: 'url("dist/imgs/quirk.png")',
-        name: 'Quirk',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Gak + Quirrel',
@@ -2753,9 +2626,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D2, Z3D3',
     },
-    {
+    {   name: 'Blargnar',
         image: 'url("dist/imgs/blargnar.png")',
-        name: 'Blargnar',
         perc1: '22.5% ',
         bonus1: 'Life Steal',
         fusedFams: 'Blubber + Ragnar',
@@ -2778,9 +2650,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D2, R1',
     },
-    {
+    {   name: 'Gemmroid',
         image: 'url("dist/imgs/gemmroid.png")',
-        name: 'Gemmroid',
         perc1: '22.5% ',
         bonus1: 'Health',
         fusedFams: 'Gemm + 10 Jumbo Syrum',
@@ -2803,9 +2674,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z2D3',
     },
-    {
+    {   name: 'Trixie',
         image: 'url("dist/imgs/trixie.png")',
-        name: 'Trixie',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Rexie + 10 Mini Syrum',
@@ -2828,9 +2698,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D1',
     },
-    {
+    {   name: 'Warffin',
         image: 'url("dist/imgs/warffin.png")',
-        name: 'Warffin',
         perc1: '22.5% ',
         bonus1: 'Speed',
         fusedFams: 'Warty + Driffin',
@@ -2853,9 +2722,8 @@ const fusions = [
         source: 'dungeon, raid',
         specSource: 'Z4D2, R2',
     },
-    {
+    {   name: "Kov'or",
         image: 'url("dist/imgs/kovor.png")',
-        name: "Kov'or",
         perc1: '225% ',
         bonus1: 'Crit Damage',
         fusedFams: "Kov'alg + Oevor",
@@ -2878,9 +2746,8 @@ const fusions = [
         source: 'dungeon, raid',
         specSource: 'Z4D3, R2',
     },
-    {
+    {   name: 'Rolace',
         image: 'url("dist/imgs/rolace.png")',
-        name: 'Rolace',
         perc1: '13.5% ',
         bonus1: 'Deflect Chance',
         fusedFams: 'Roy + Violace',
@@ -2903,9 +2770,8 @@ const fusions = [
         source: 'dungeon, raid',
         specSource: 'Z4D1, R2',
     },
-    {
+    {   name: 'Quirinus',
         image: 'url("dist/imgs/quirinus.png")',
-        name: 'Quirinus',
         perc1: '22.5% ',
         bonus1: 'Speed',
         fusedFams: 'Quirrel + 10 Mini Syrum',
@@ -2928,9 +2794,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z3D3',
     },
-    {
+    {   name: 'Amrul',
         image: 'url("dist/imgs/amrul.png")',
-        name: 'Amrul',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         fusedFams: 'Amby + Zorul',
@@ -2953,9 +2818,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z5D2',
     },
-    {
+    {   name: 'Tealkers',
         image: 'url("dist/imgs/tealkers.png")',
-        name: 'Tealkers',
         perc1: '45% ',
         bonus1: 'Block Chance',
         fusedFams: ' Tealk +  Krackers',
@@ -2978,9 +2842,8 @@ const fusions = [
         source: 'dungeon, raid',
         specSource: 'Z5D3, R3',
     },
-    {
+    {   name: 'Pargz',
         image: 'url("dist/imgs/pargz.png")',
-        name: 'Pargz',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         fusedFams: ' Patches +  Bargz',
@@ -3003,9 +2866,8 @@ const fusions = [
         source: 'dungeon, raid',
         specSource: 'Z4D2, R3',
     },
-    {
+    {   name: 'Groger',
         image: 'url("dist/imgs/groger.png")',
-        name: 'Groger',
         perc1: '225% ',
         bonus1: 'Crit Damage',
         fusedFams: 'Grimz + Kroger',
@@ -3028,9 +2890,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z1D1, Z5D1',
     },
-    {
+    {   name: 'Remmyt',
         image: 'url("dist/imgs/remmyt.png")',
-        name: 'Remmyt',
         perc1: '22.5% ',
         bonus1: 'Damage',
         fusedFams: 'Rexie + Emmyt',
@@ -3053,9 +2914,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z4D1, Z5D1',
     },
-    {
+    {   name: 'Minlim',
         image: 'url("dist/imgs/minlim.png")',
-        name: 'Minlim',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: ' Torlim +10 Mini Syrum',
@@ -3078,9 +2938,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z5D1',
     },
-    {
+    {   name: 'Jacked',
         image: 'url("dist/imgs/jacked.png")',
-        name: 'Jacked',
         perc1: '22.5% ',
         bonus1: 'Damage',
         fusedFams: ' Jack + 10 Jumbo Syrum',
@@ -3103,9 +2962,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'R3',
     },
-    {
+    {   name: 'Ulairius',
         image: 'url("dist/imgs/ulairius.png")',
-        name: 'Ulairius',
         perc1: '13.5% ',
         bonus1: 'Deflect Chance',
         fusedFams: '3  Negrim + 3  Varlos + 3  Larzhul',
@@ -3125,9 +2983,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z6D3',
     },
-    {
+    {   name: 'Cheb',
         image: 'url("dist/imgs/cheb.png")',
-        name: 'Cheb',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: ' Chewy +  Blemb',
@@ -3150,9 +3007,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z6D2',
     },
-    {
+    {   name: 'Rogomz',
         image: 'url("dist/imgs/rogomz.png")',
-        name: 'Rogomz',
         perc1: '11.5% ',
         bonus1: 'Absorb Chance',
         fusedFams: ' J3-17 +  Rugumz',
@@ -3175,9 +3031,8 @@ const fusions = [
         source: 'raid, dungeon',
         specSource: 'R4, Z6D1',
     },
-    {
+    {   name: 'Moboz',
         image: 'url("dist/imgs/moboz.png")',
-        name: 'Moboz',
         perc1: '22.5% ',
         bonus1: 'Empower Chance',
         fusedFams: ' Duobomz +  Melvins',
@@ -3200,9 +3055,8 @@ const fusions = [
         source: 'raid, dungeon',
         specSource: 'R4, Z3D2',
     },
-    {
+    {   name: 'Loghir',
         image: 'url("dist/imgs/loghir.png")',
-        name: 'Loghir',
         perc1: '225% ',
         bonus1: 'Crit Damage',
         fusedFams: ' Moghur + 10 Mini Syrum',
@@ -3225,9 +3079,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z6D3',
     },
-    {
+    {   name: 'RoboBuddy 2.0',
         image: 'url("dist/imgs/robobuddy 2.0.png")',
-        name: 'RoboBuddy 2.0',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         fusedFams: ' RoboMax - 6000 + 10 Mini Syrum',
@@ -3250,9 +3103,8 @@ const fusions = [
         source: 'raid',
         specSource: 'R4',
     },
-    {
+    {   name: 'Winslobo',
         image: 'url("dist/imgs/winslobo.png")',
-        name: 'Winslobo',
         perc1: '13.5% ',
         bonus1: 'Deflect Chance',
         fusedFams: ' Winslow +  J3-17',
@@ -3272,9 +3124,8 @@ const fusions = [
         source: 'dungeon, raid',
         specSource: 'Z7D2, R4',
     },
-    {
+    {   name: 'Glubboz',
         image: 'url("dist/imgs/glubboz.png")',
-        name: 'Glubboz',
         perc1: '22.5% ',
         bonus1: 'Damage',
         fusedFams: 'The Gooz +  Blubber',
@@ -3297,9 +3148,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z7D2, Z2D2',
     },
-    {
+    {   name: 'Xandaire',
         image: 'url("dist/imgs/xandaire.png")',
-        name: 'Xandaire',
         perc1: '11.5% ',
         bonus1: 'Absorb Chance',
         fusedFams: ' Xanthin +  Vedaire',
@@ -3322,9 +3172,8 @@ const fusions = [
         source: 'raid, dungeon',
         specSource: 'R5, Z7D2',
     },
-    {
+    {   name: 'Scort',
         image: 'url("dist/imgs/scort.png")',
-        name: 'Scort',
         perc1: '22.5% ',
         bonus1: 'Damage Reduction',
         fusedFams: ' Scorpius + 10 Mini Syrum',
@@ -3347,9 +3196,8 @@ const fusions = [
         source: 'raid',
         specSource: 'Z7D1',
     },
-    {
+    {   name: 'Gelbos',
         image: 'url("dist/imgs/gelbos.png")',
-        name: 'Gelbos',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: ' Gelvins + 3 Robot Sprockets',
@@ -3372,9 +3220,8 @@ const fusions = [
         source: 'raid',
         specSource: 'R5',
     },
-    {
+    {   name: 'Googamarmz',
         image: 'url("dist/imgs/googamarmz.png")',
-        name: 'Googamarmz',
         perc1: '22.5% ',
         bonus1: 'Damage',
         fusedFams: 'Googamenz + Marm',
@@ -3397,9 +3244,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z8D1, Z8D2',
     },
-    {
+    {   name: 'TriloBros',
         image: 'url("dist/imgs/trilobros.png")',
-        name: 'TriloBros',
         perc1: '22.5% ',
         bonus1: 'Speed',
         fusedFams: 'CandelaBros + The Trilogy',
@@ -3422,9 +3268,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Z8D2',
     },
-    {
+    {   name: 'Grumber',
         image: 'url("dist/imgs/grumber.png")',
-        name: 'Grumber',
         perc1: '15% ',
         bonus1: 'Damage Reduction',
         brain: 'Upon death, revive all fallen teammates with a moderate amount of health',
@@ -3448,9 +3293,8 @@ const fusions = [
         source: 'raid',
         specSource: 'R6',
     },
-    {
+    {   name: 'Sproulor',
         image: 'url("dist/imgs/sproulor.png")',
-        name: 'Sproulor',
         perc1: '15% ',
         bonus1: 'Damage',
         brain: 'While at full health, damage increased by 20%',
@@ -3474,9 +3318,8 @@ const fusions = [
         source: 'raid',
         specSource: 'R6',
     },
-    {
+    {   name: 'Flunder',
         image: 'url("dist/imgs/flunder.png")',
-        name: 'Flunder',
         perc1: '15% ',
         bonus1: 'Empower Chance',
         brain: 'First attack against you per battle is deflected',
@@ -3500,9 +3343,8 @@ const fusions = [
         source: 'raid',
         specSource: 'R6',
     },
-    {
+    {   name: 'Zahla',
         image: 'url("dist/imgs/zahla.png")',
-        name: 'Zahla',
         perc1: '30% ',
         bonus1: 'Block Chance',
         brain: '5% chance for healing skills received to be twice as effective',
@@ -3526,9 +3368,8 @@ const fusions = [
         source: 'raid',
         specSource: 'R5, R7',
     },
-    {
+    {   name: 'Capori',
         image: 'url("dist/imgs/capori.png")',
-        name: 'Capori',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         brain: 'Over Healing converts to Shields',
@@ -3552,9 +3393,8 @@ const fusions = [
         source: 'raid',
         specSource: 'R7',
     },
-    {
+    {   name: 'Paula',
         image: 'url("dist/imgs/paula.png")',
-        name: 'Paula',
         perc1: '15% ',
         bonus1: 'Speed',
         brain: 'You and nearby teammates gain 10% SP regeneration',
@@ -3578,9 +3418,8 @@ const fusions = [
         source: 'raid, dungeon',
         specSource: 'R7, Z4D2',
     },
-    {
+    {   name: 'Gakgo',
         image: 'url("dist/imgs/gakgo.png")',
-        name: 'Gakgo',
         perc1: '22.5% ',
         bonus1: 'Damage Reduction',
         brain: 'Remove 15% health from the enemy team the first time you take damage. Usable once per adventure.',
@@ -3604,9 +3443,8 @@ const fusions = [
         source: 'raid',
         specSource: 'Z2D2, R8',
     },
-    {
+    {   name: 'Encherzog',
         image: 'url("dist/imgs/encherzog.png")',
-        name: 'Encherzog',
         perc1: '22.5% ',
         bonus1: 'Empower Chance',
         brain: 'Remove 15% health from the enemy team the first time you take damage. Usable once per adventure.',
@@ -3630,9 +3468,8 @@ const fusions = [
         source: 'raid, dungeon',
         specSource: 'R8, Z10D1',
     },
-    {
+    {   name: 'Theraros',
         image: 'url("dist/imgs/theraros.png")',
-        name: 'Theraros',
         eleDmg: 'Earth ',
         perc1: '5% ',
         bonus1: 'Resistance',
@@ -3658,9 +3495,8 @@ const fusions = [
         source: 'dungeon, worldboss',
         specSource: 'Z3D2, titan',
     },
-    {
+    {   name: 'Tearios',
         image: 'url("dist/imgs/tearios.png")',
-        name: 'Tearios',
         eleDmg: 'Water ',
         perc1: '5% ',
         bonus1: 'Dmg',
@@ -3690,10 +3526,9 @@ const fusions = [
     },
     //#endregion
 
-    //#region //------------------ EPIC WB ------------------//
-    {
+    //#region //------------------ EPIC WB ------------------//√
+    {   name: 'Velk',
         image: 'url("dist/imgs/velk.png")',
-        name: 'Velk',
         perc1: '22.5% ',
         bonus1: 'Empower Chance',
         fusedFams: '6 Staeus + 10 Hobbit Foot',
@@ -3716,9 +3551,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z4D3, orlag',
     },
-    {
+    {   name: 'Garekk',
         image: 'url("dist/imgs/garekk.png")',
-        name: 'Garekk',
         perc1: '22.5% ',
         bonus1: 'Block Chance',
         perc2: '6.75% ',
@@ -3743,9 +3577,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'R1, orlag',
     },
-    {
+    {   name: 'Clavid',
         image: 'url("dist/imgs/clavid.png")',
-        name: 'Clavid',
         perc1: '22.5% ',
         bonus1: 'Empower Chance',
         fusedFams: '6  Wingo + 10 Demon Juice',
@@ -3768,9 +3601,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z6D1, nether',
     },
-    {
+    {   name: 'Omo',
         image: 'url("dist/imgs/omo.png")',
-        name: 'Omo',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         fusedFams: '6  Opo + 10 Demon Juice',
@@ -3793,9 +3625,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z6D2, nether',
     },
-    {
+    {   name: 'Zorgim',
         image: 'url("dist/imgs/zorgim.png")',
-        name: 'Zorgim',
         perc1: '22.5% ',
         bonus1: 'Damage',
         fusedFams: 'Torlim + 10 Demon Juice',
@@ -3818,9 +3649,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z5D1, nether',
     },
-    {
+    {   name: 'R2OY',
         image: 'url("dist/imgs/r2oy.png")',
-        name: 'R2OY',
         perc1: '20% ',
         bonus1: 'Damage Reduction',
         perc2: '2.5% ',
@@ -3845,9 +3675,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z4D1, exterm',
     },
-    {
+    {   name: 'Reaplicator',
         image: 'url("dist/imgs/reaplicator.png")',
-        name: 'Reaplicator',
         perc1: '18.5% ',
         bonus1: 'Dual Strike',
         perc2: '1% ',
@@ -3872,9 +3701,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z6D3, exterm',
     },
-    {
+    {   name: 'Woberleng',
         image: 'url("dist/imgs/woberleng.png")',
-        name: 'Woberleng',
         perc1: '45% ',
         bonus1: 'Block Chance',
         fusedFams: 'Driffin + Findlin + Vicky + 10 Scarlag Skin',
@@ -3897,9 +3725,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'R2, Z8D2, Z8D1, Z7D1, brimstone',
     },
-    {
+    {   name: 'Dullag',
         image: 'url("dist/imgs/dullag.png")',
-        name: 'Dullag',
         perc1: '18.5% ',
         bonus1: 'Empower Chance',
         perc2: '1% ',
@@ -3924,9 +3751,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z6D2, Z4D3, Z5D2, brimstone',
     },
-    {
+    {   name: 'Delong',
         image: 'url("dist/imgs/delong.png")',
-        name: 'Delong',
         perc1: '17.5% ',
         bonus1: 'Damage Reduction',
         perc2: '2.5% ',
@@ -3951,9 +3777,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z4D1, Z5D2, Z7D2, brimstone',
     },
-    {
+    {   name: 'Tartaru',
         image: 'url("dist/imgs/tartaru.png")',
-        name: 'Tartaru',
         eleDmg: 'Water ',
         perc1: '17.5% ',
         bonus1: 'Empower Chance',
@@ -3979,9 +3804,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'R8, Z10D2, Z10D3, titan',
     },
-    {
+    {   name: 'Cronus',
         image: 'url("dist/imgs/cronus.png")',
-        name: 'Cronus',
         eleDmg: 'Water ',
         perc1: '40% ',
         bonus1: 'Crit Chance',
@@ -4007,9 +3831,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'Z6D1, Z8D1, Z4D2, titan',
     },
-    {
+    {   name: 'Hestia',
         image: 'url("dist/imgs/hestia.png")',
-        name: 'Hestia',
         eleDmg: 'Water ',
         perc1: '7.5% ',
         bonus1: 'Absorb Chance',
@@ -4037,10 +3860,9 @@ const fusions = [
     },
     //#endregion
 
-    //#region //------------- EPIC INVASION -------------//
-    {
+    //#region //------------- EPIC INVASION -------------//√
+    {   name: 'Zubbo',
         image: 'url("dist/imgs/zubbo.png")',
-        name: 'Zubbo',
         perc1: '22.5% ',
         bonus1: 'Block Chance',
         perc2: '11.25% ',
@@ -4062,12 +3884,11 @@ const fusions = [
         tar4: furthest,
         dam4: '147-273%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z1D1, zombo',
     },
-    {
+    {   name: 'Zobblestein',
         image: 'url("dist/imgs/zobblestein.png")',
-        name: 'Zobblestein',
         perc1: '22.5% ',
         bonus1: 'Crit Chance',
         perc2: '11.25% ',
@@ -4089,12 +3910,11 @@ const fusions = [
         tar4: target,
         dam4: '144-216%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z2D1, zombo',
     },
-    {
+    {   name: 'Zina',
         image: 'url("dist/imgs/zina.png")',
-        name: 'Zina',
         perc1: '11.25% ',
         bonus1: 'Evade Chance',
         perc2: '6.75% ',
@@ -4116,12 +3936,11 @@ const fusions = [
         tar4: target,
         dam4: '144-216%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z3D1, zombo',
     },
-    {
+    {   name: 'Penja',
         image: 'url("dist/imgs/penja.png")',
-        name: 'Penja',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         perc2: '7.5% ',
@@ -4143,12 +3962,11 @@ const fusions = [
         tar4: tarHeal,
         dam4: '88-132%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z2D1, ninja',
     },
-    {
+    {   name: 'Nubbo',
         image: 'url("dist/imgs/nubbo.png")',
-        name: 'Nubbo',
         perc1: '11.25% ',
         bonus1: 'Absorb Chance',
         fusedFams: '5 Tubbo + 100 Ninja Powah',
@@ -4168,12 +3986,11 @@ const fusions = [
         tar4: furthest,
         dam4: '157.2-366.8%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z1D1, ninja',
     },
-    {
+    {   name: 'Bruja',
         image: 'url("dist/imgs/bruja.png")',
-        name: 'Bruja',
         perc1: '22.5% ',
         bonus1: 'Block Chance',
         perc2: '11.25% ',
@@ -4195,12 +4012,11 @@ const fusions = [
         tar4: closest,
         dam4: '183.2-274.8%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z5D3, ninja',
     },
-    {
+    {   name: 'The Champs',
         image: 'url("dist/imgs/the champs.png")',
-        name: 'The Champs',
         perc1: '11.25% ',
         bonus1: 'Damage',
         perc2: '11.25% ',
@@ -4222,12 +4038,11 @@ const fusions = [
         tar4: drainClose,
         dam4: '80-120%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z3D2, ninja',
     },
-    {
+    {   name: 'Holimenz',
         image: 'url("dist/imgs/holimenz.png")',
-        name: 'Holimenz',
         perc1: '22.5% ',
         bonus1: 'Damage',
         fusedFams: '5 Bebemenz + 100 Ginger Snaps',
@@ -4247,12 +4062,11 @@ const fusions = [
         tar4: all,
         dam4: '48-112%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z5D1, holiday',
     },
-    {
+    {   name: 'Chelf',
         image: 'url("dist/imgs/chelf.png")',
-        name: 'Chelf',
         perc1: '11.25% ',
         bonus1: 'Empower Chance',
         perc2: '11.25% ',
@@ -4274,12 +4088,11 @@ const fusions = [
         tar4: drainClose,
         dam4: '80-120%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z6D2, holiday',
     },
-    {
+    {   name: 'Polly',
         image: 'url("dist/imgs/polly.png")',
-        name: 'Polly',
         perc1: '22.5% ',
         bonus1: 'Damage Enrage',
         fusedFams: '5 Poke + 100 Jelly Donut',
@@ -4299,12 +4112,11 @@ const fusions = [
         tar4: spreadHeal,
         dam4: '84-156%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z7D1, jelly',
     },
-    {
+    {   name: 'Jopo',
         image: 'url("dist/imgs/jopo.png")',
-        name: 'Jopo',
         perc1: '22.5% ',
         bonus1: 'Evade Chance',
         fusedFams: '5 Opo + 100 Jelly Donut',
@@ -4324,12 +4136,11 @@ const fusions = [
         tar4: selfShield,
         dam4: '90-210%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z6D2, jelly',
     },
-    {
+    {   name: 'Shroogle',
         image: 'url("dist/imgs/shroogle.png")',
-        name: 'Shroogle',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: '5 Shrump + 100 Jelly Donut',
@@ -4349,12 +4160,11 @@ const fusions = [
         tar4: furthest,
         dam4: '168-252%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z1D2, jelly',
     },
-    {
+    {   name: 'Wensloo',
         image: 'url("dist/imgs/wensloo.png")',
-        name: 'Wensloo',
         perc1: '11.25% ',
         bonus1: 'Absorb Chance',
         fusedFams: '5 Winslow + 100 Jelly Donut',
@@ -4374,12 +4184,11 @@ const fusions = [
         tar4: tarHeal,
         dam4: '57.4-106.6%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z7D2, jelly',
     },
-    {
+    {   name: 'Elote',
         image: 'url("dist/imgs/elote.png")',
-        name: 'Elote',
         perc1: '45% ',
         bonus1: 'Block Chance',
         fusedFams: '5 Poke + 100 Croutons',
@@ -4399,12 +4208,11 @@ const fusions = [
         tar4: target,
         dam4: '94.5-175.5%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z7D1, papoz',
     },
-    {
+    {   name: 'Findellow',
         image: 'url("dist/imgs/findellow.png")',
-        name: 'Findellow',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: '5 Findle + 100 Croutons',
@@ -4424,12 +4232,11 @@ const fusions = [
         tar4: random,
         dam4: '136.5-253.5%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z8D2, papoz',
     },
-    {
+    {   name: "Melv'cone",
         image: 'url("dist/imgs/melvcone.png")',
-        name: "Melv'cone",
         perc1: '22.5% ',
         bonus1: 'Damage Reduction',
         fusedFams: "5 Melv'guin + 100 Croutons",
@@ -4449,12 +4256,11 @@ const fusions = [
         tar4: target,
         dam4: '144-216%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z5D2, papoz',
     },
-    {
+    {   name: 'McSaday Mon',
         image: 'url("dist/imgs/mcsaday mon.png")',
-        name: 'McSaday Mon',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         fusedFams: '5 McGobblestein + 100 Feastum',
@@ -4474,12 +4280,11 @@ const fusions = [
         tar4: randomx2,
         dam4: '104-156%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z2D1, turkey',
     },
-    {
+    {   name: 'Garwyn',
         image: 'url("dist/imgs/garwyn.png")',
-        name: 'Garwyn',
         perc1: '13.5% ',
         bonus1: 'Deflect Chance',
         fusedFams: '5 Trelpin + 100 Feastum',
@@ -4499,12 +4304,11 @@ const fusions = [
         tar4: tarHeal,
         dam4: '82.5-137.5%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z8D1, turkey',
     },
-    {
+    {   name: 'Kheli',
         image: 'url("dist/imgs/kheli.png")',
-        name: 'Kheli',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Scorpius + 100 Feastum',
@@ -4524,15 +4328,14 @@ const fusions = [
         tar4: spreadHeal,
         dam4: '67.5-112.5%',
         rarity: 'epic',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z7D1, turkey',
     },
     //#endregion
 
     //#region //------------- EPIC EXPEDITION -------------//
-    {
+    {   name: 'Pabot',
         image: 'url("dist/imgs/pabot.png")',
-        name: 'Pabot',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         brain: '0% chance to spread heal for 36.8-55.2% per turn',
@@ -4556,9 +4359,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Pobo',
         image: 'url("dist/imgs/pobo.png")',
-        name: 'Pobo',
         perc1: '45% ',
         bonus1: 'Block Chance',
         brain: '0% chance to spread shield for 33.6-50.4% when you get hit',
@@ -4582,9 +4384,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Whoost',
         image: 'url("dist/imgs/whoost.png")',
-        name: 'Whoost',
         perc1: '22.5% ',
         bonus1: 'Empower Chance',
         brain: '0% chance to attack weakest enemy for 42-63% when you hit an enemy',
@@ -4608,9 +4409,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Findolo',
         image: 'url("dist/imgs/findolo.png")',
-        name: 'Findolo',
         perc1: '22.5% ',
         bonus1: 'Evade Chance',
         brain: '0% chance to spread heal for 36.8-55.2% when you get hit',
@@ -4634,9 +4434,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Brimbino',
         image: 'url("dist/imgs/brimbino.png")',
-        name: 'Brimbino',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         brain: '0% chance to attack weakest enemy for 42-63% per turn',
@@ -4660,9 +4459,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Winslar',
         image: 'url("dist/imgs/winslar.png")',
-        name: 'Winslar',
         perc1: '22.5% ',
         bonus1: 'Damage Reduction',
         brain: '0% chance to spread heal for 36.8-55.2% when you get hit',
@@ -4686,9 +4484,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Troplo',
         image: 'url("dist/imgs/troplo.png")',
-        name: 'Troplo',
         perc1: '22.5% ',
         bonus1: 'Damage',
         brain: '0% chance to attack weakest enemy for 42-63% when you get hit',
@@ -4712,9 +4509,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Murbi',
         image: 'url("dist/imgs/murbi.png")',
-        name: 'Murbi',
         perc1: '13.5% ',
         bonus1: 'Deflect Chance',
         brain: '0% chance to heal team for 18.4-27.6% when you get hit',
@@ -4738,9 +4534,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Peabo',
         image: 'url("dist/imgs/peabo.png")',
-        name: 'Peabo',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         brain: '0% chance to attack weakest enemy for 42-63% when you hit an enemy',
@@ -4764,9 +4559,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Scubblez',
         image: 'url("dist/imgs/scubblez.png")',
-        name: 'Scubblez',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         brain: '0% chance to spread heal for 36.8-55.2% when you hit an enemy',
@@ -4790,9 +4584,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Marmbo',
         image: 'url("dist/imgs/marmbo.png")',
-        name: 'Marmbo',
         perc1: '22.5% ',
         bonus1: 'Damage',
         brain: '0% chance to heal and shield team for 8.4-12.6% when you hit an enemy',
@@ -4816,9 +4609,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Zorgo',
         image: 'url("dist/imgs/zorgo.png")',
-        name: 'Zorgo',
         perc1: '45% ',
         bonus1: 'Crit Chance',
         brain: '0% chance to attack enemy team for 27.6-41.4% per turn',
@@ -4842,9 +4634,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Petti',
         image: 'url("dist/imgs/petti.png")',
-        name: 'Petti',
         perc1: '22.5% ',
         bonus1: 'Evade Chance',
         brain: '0% chance to attack enemy team for 27.6-41.4% when you hit an enemy',
@@ -4868,9 +4659,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: "Melv'eti",
         image: 'url("dist/imgs/melveti.png")',
-        name: "Melv'eti",
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         brain: '0% chance to heal team for 18.4-27.6% per turn',
@@ -4894,9 +4684,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Yingo',
         image: 'url("dist/imgs/yingo.png")',
-        name: 'Yingo',
         perc1: '11.25% ',
         bonus1: 'Empower Chance',
         perc2: '11.25% ',
@@ -4922,9 +4711,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Bronsie',
         image: 'url("dist/imgs/bronsie.png")',
-        name: 'Bronsie',
         perc1: '22.5% ',
         bonus1: 'Damage Reduction',
         brain: '0% chance to spread shield for 33.6-50.4% when you get hit',
@@ -4948,9 +4736,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Smixy',
         image: 'url("dist/imgs/smixy.png")',
-        name: 'Smixy',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         brain: '0% chance to spread heal and spread shield for 18.4-27.6% per turn',
@@ -4974,9 +4761,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Brutow',
         image: 'url("dist/imgs/brutow.png")',
-        name: 'Brutow',
         perc1: '45% ',
         bonus1: 'Block Chance',
         brain: '0% chance to spread heal for 36.8-55.2% when you get hit',
@@ -5000,9 +4786,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Marnerys',
         image: 'url("dist/imgs/marnerys.png")',
-        name: 'Marnerys',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         brain: '0% chance attack weakest enemy for 42-63% when you hit an enemy',
@@ -5026,9 +4811,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Rokely',
         image: 'url("dist/imgs/rokely.png")',
-        name: 'Rokely',
         perc1: '11.25% ',
         bonus1: 'Absorb Chance',
         brain: '0% chance to heal team for 18.4-27.6% when you get hit',
@@ -5052,9 +4836,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Hebbo',
         image: 'url("dist/imgs/hebbo.png")',
-        name: 'Hebbo',
         perc1: '13.5% ',
         bonus1: 'Deflect Chance',
         brain: '0% chance to spread heal and spread shield for 17.6-26.4% when you hit an enemy',
@@ -5078,9 +4861,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Sleti',
         image: 'url("dist/imgs/sleti.png")',
-        name: 'Sleti',
         perc1: '15% ',
         bonus1: 'Damage Reduction',
         fusedFams: '2 Yeti + 100 Kickapick',
@@ -5103,9 +4885,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Stromp',
         image: 'url("dist/imgs/stromp.png")',
-        name: 'Stromp',
         perc1: '22.5% ',
         bonus1: 'Speed',
         fusedFams: '2 Staeus + 100 Kickapick',
@@ -5128,9 +4909,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Blinka',
         image: 'url("dist/imgs/blinka.png")',
-        name: 'Blinka',
         perc1: '22.5% ',
         bonus1: 'Empower Chance',
         fusedFams: '2 Anrie + 100 Jajajajackpot',
@@ -5153,9 +4933,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'MXO',
         image: 'url("dist/imgs/mxo.png")',
-        name: 'MXO',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         fusedFams: '2 Melvins + 100 Jajajajackpot',
@@ -5178,9 +4957,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Dabird',
         image: 'url("dist/imgs/dabird.png")',
-        name: 'Dabird',
         perc1: '40% ',
         bonus1: 'Block Chance',
         fusedFams: '2 Zorul + 100 Ohmama',
@@ -5206,9 +4984,8 @@ const fusions = [
     //#endregion
 
     //#region //------------- LEGENDARY DUNGEON -------------//
-    {
+    {   name: 'Robby',
         image: 'url("dist/imgs/robby.png")',
-        name: 'Robby',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Gobby + 5 Robot Sprocket',
@@ -5234,9 +5011,8 @@ const fusions = [
         source: 'dungeon',
         specSource: 'Any',
     },
-    {
+    {   name: 'Olxaroth',
         image: 'url("dist/imgs/olxaroth.png")',
-        name: 'Olxaroth',
         perc1: '60% ',
         bonus1: 'Block Chance',
         fusedFams: 'Astaroth + Olxa',
@@ -5262,9 +5038,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Mimeido',
         image: 'url("dist/imgs/mimeido.png")',
-        name: 'Mimeido',
         perc1: '30% ',
         bonus1: 'Damage',
         fusedFams: 'Mimzy + Kaleido',
@@ -5290,9 +5065,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Astally',
         image: 'url("dist/imgs/astally.png")',
-        name: 'Astally',
         perc1: '18% ',
         bonus1: 'Deflect Chance',
         fusedFams: 'Astaroth + Bully',
@@ -5318,9 +5092,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Beido',
         image: 'url("dist/imgs/beido.png")',
-        name: 'Beido',
         perc1: '30% ',
         bonus1: 'Speed',
         fusedFams: 'Kaleido + Capt. Woodbeard',
@@ -5346,9 +5119,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Wemmbo',
         image: 'url("dist/imgs/wemmbo.png")',
-        name: 'Wemmbo',
         perc1: '300% ',
         bonus1: 'Crit Damage',
         fusedFams: 'Warffin + Jemm + Squibbo',
@@ -5374,9 +5146,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Korgz',
         image: 'url("dist/imgs/korgz.png")',
-        name: 'Korgz',
         perc1: '30% ',
         bonus1: 'Dual Strike',
         fusedFams: "Kov'or + Quirk + Pengz",
@@ -5402,9 +5173,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Bobodom',
         image: 'url("dist/imgs/bobodom.png")',
-        name: 'Bobodom',
         perc1: '30% ',
         bonus1: 'Evade Chance',
         fusedFams: 'Blargnar + Yobo + Nosdomdom',
@@ -5430,9 +5200,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Rolesker',
         image: 'url("dist/imgs/rolesker.png")',
-        name: 'Rolesker',
         perc1: '30% ',
         bonus1: 'Damage Enrage',
         fusedFams: "Es'skeletrad + Rolace + Tealkers",
@@ -5458,9 +5227,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Remruade',
         image: 'url("dist/imgs/remruade.png")',
-        name: 'Remruade',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         fusedFams: 'Remmyt + Cuerade + Amrul',
@@ -5486,9 +5254,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Capt. Wombomz',
         image: 'url("dist/imgs/capt. wombomz.png")',
-        name: 'Capt. Wombomz',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         perc2: '30% ',
@@ -5516,9 +5283,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gozzy',
         image: 'url("dist/imgs/gozzy.png")',
-        name: 'Gozzy',
         perc1: '30% ',
         bonus1: 'Damage',
         fusedFams: 'XL-Ombis 400 + Olxa',
@@ -5544,9 +5310,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Walkom',
         image: 'url("dist/imgs/walkom.png")',
-        name: 'Walkom',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         fusedFams: 'Warffin +  Velk + Moboz',
@@ -5572,9 +5337,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Zovilby',
         image: 'url("dist/imgs/zovilby.png")',
-        name: 'Zovilby',
         perc1: '60% ',
         bonus1: 'Block Chance',
         fusedFams: 'Bully + Zol',
@@ -5600,9 +5364,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Svirnel',
         image: 'url("dist/imgs/svirnel.png")',
-        name: 'Svirnel',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         fusedFams: '3 Svirnic + Svirnan',
@@ -5628,9 +5391,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Cloubin',
         image: 'url("dist/imgs/cloubin.png")',
-        name: 'Cloubin',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         perc2: '15% ',
@@ -5658,9 +5420,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Columbosim',
         image: 'url("dist/imgs/columbosim.png")',
-        name: 'Columbosim',
         perc1: '45% ',
         bonus1: 'Block Chance',
         brain: 'Deal 92-138% damage to the enemy team the first time you drop below 50% health',
@@ -5687,9 +5448,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gengie',
         image: 'url("dist/imgs/gengie.png")',
-        name: 'Gengie',
         perc1: '22.5% ',
         bonus1: 'Damage',
         brain: 'While at full health, damage increased by 10%',
@@ -5716,9 +5476,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gorbundo',
         image: 'url("dist/imgs/gorbundo.png")',
-        name: 'Gorbundo',
         perc1: '11.25% ',
         bonus1: 'Absorb Chance',
         fusedFams: 'Columbus + Gorbon + 150 Eshmark',
@@ -5747,9 +5506,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Skubby',
         image: 'url("dist/imgs/skubby.png")',
-        name: 'Skubby',
         perc1: '30% ',
         bonus1: 'Damage',
         fusedFams: '2 Gobby + 150 Red Skull',
@@ -5775,9 +5533,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Rvirnan',
         image: 'url("dist/imgs/rvirnan.png")',
-        name: 'Rvirnan',
         perc1: '7.5% ',
         bonus1: 'Quad Strike',
         fusedFams: '2 Svirnan + 150 Red Skull',
@@ -5803,9 +5560,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'X4-Happuff',
         image: 'url("dist/imgs/x4-happuff.png")',
-        name: 'X4-Happuff',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         fusedFams: '2 X4-Gombo + 150 Red Skull',
@@ -5831,9 +5587,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gobelux',
         image: 'url("dist/imgs/gobelux.png")',
-        name: 'Gobelux',
         eleDmg: 'Electric ',
         perc1: '30% ',
         bonus1: 'Damage',
@@ -5862,9 +5617,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Feodebius',
         image: 'url("dist/imgs/feodebius.png")',
-        name: 'Feodebius',
         eleDmg: 'Earth ',
         perc1: '10% ',
         bonus1: 'Resistance',
@@ -5894,9 +5648,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Oladus',
         image: 'url("dist/imgs/oladus.png")',
-        name: 'Oladus',
         eleDmg: 'Air ',
         perc1: '5% ',
         bonus1: 'Resistance',
@@ -5925,9 +5678,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Ukalis',
         image: 'url("dist/imgs/ukalis.png")',
-        name: 'Ukalis',
         eleDmg: 'Electric ',
         perc1: '15% ',
         bonus1: 'Dmg',
@@ -5958,10 +5710,9 @@ const fusions = [
     },
     //#endregion
 
-    //#region //-------------- LEGENDARY WB --------------//
-    {
+    //#region //-------------- LEGENDARY WB --------------//√
+    {   name: 'Torlag',
         image: 'url("dist/imgs/torlag.png")',
-        name: 'Torlag',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         perc2: '15% ',
@@ -5989,9 +5740,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'orlag',
     },
-    {
+    {   name: 'Yorlag',
         image: 'url("dist/imgs/yorlag.png")',
-        name: 'Yorlag',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         perc2: '15% ',
@@ -6019,9 +5769,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'orlag',
     },
-    {
+    {   name: 'Gorlag',
         image: 'url("dist/imgs/gorlag.png")',
-        name: 'Gorlag',
         perc1: '30% ',
         bonus1: 'Block Chance',
         perc2: '7.5% ',
@@ -6049,9 +5798,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'orlag',
     },
-    {
+    {   name: 'Meaty',
         image: 'url("dist/imgs/meaty.png")',
-        name: 'Meaty',
         perc1: '15% ',
         bonus1: 'Absorb Chance',
         fusedFams: '2 Garekk + 1 Velk + 15 Hobbit Foot',
@@ -6077,9 +5825,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'orlag',
     },
-    {
+    {   name: 'D3-M0N',
         image: 'url("dist/imgs/d3-m0n.png")',
-        name: 'D3-M0N',
         perc1: '300% ',
         bonus1: 'Crit Damage',
         fusedFams: 'X4-Gombo + 15 Demon Juice',
@@ -6105,9 +5852,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'R4, nether',
     },
-    {
+    {   name: 'Ragmar',
         image: 'url("dist/imgs/ragmar.png")',
-        name: 'Ragmar',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         fusedFams: '3 Clavid + 15 Demon Juice',
@@ -6133,9 +5879,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'nether',
     },
-    {
+    {   name: 'Drazig',
         image: 'url("dist/imgs/drazig.png")',
-        name: 'Drazig',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         perc2: '15% ',
@@ -6163,9 +5908,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'nether',
     },
-    {
+    {   name: 'Rarzok',
         image: 'url("dist/imgs/rarzok.png")',
-        name: 'Rarzok',
         perc1: '9% ',
         bonus1: 'Deflect Chance',
         perc2: '15% ',
@@ -6193,9 +5937,8 @@ const fusions = [
         source: 'worldboss',
         specSource: 'nether',
     },
-    {
+    {   name: 'Geove',
         image: 'url("dist/imgs/geove.png")',
-        name: 'Geove',
         perc1: '13.5% ',
         bonus1: 'Deflect Chance',
         brain: 'Teammates behind you take 5% reduced damage',
@@ -6219,15 +5962,14 @@ const fusions = [
         tar5: furthestSelf,
         dam5: '168-252% (16.8-25.2%)',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'melvin',
     },
-    {
+    {   name: 'Melvoo',
         image: 'url("dist/imgs/melvoo.png")',
-        name: 'Melvoo',
         perc1: '45% ',
         bonus1: 'Block Chance',
-        brain: 'eammates behind you deal 5% increased damage',
+        brain: 'Teammates behind you deal 5% increased damage',
         fusedFams: '40 Melvin Chest',
         atk: '31.7%',
         hp: '42.8%',
@@ -6248,17 +5990,14 @@ const fusions = [
         tar5: random,
         dam5: '?-?%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'melvin',
     },
-    {
+    {   name: 'Melsson',
         image: 'url("dist/imgs/melsson.png")',
-        name: 'Melsson',
         perc1: '22.5% ',
         bonus1: 'Empower Chance',
-        perc2: 'eal 10% ',
-        bonus2: 'increased damage',
-        brain: ' but take 10% increased damage',
+        brain: 'Deal 10% increased damage, but take 10% increased damage',
         fusedFams: '40 Melvin Chest',
         atk: '15.8%',
         hp: '31.7%',
@@ -6279,15 +6018,14 @@ const fusions = [
         tar5: random,
         dam5: '195-585%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'melvin',
     },
-    {
+    {   name: 'Macho Mad Dog Melly Man',
         image: 'url("dist/imgs/macho mad dog melly man.png")',
-        name: 'Macho Mad Dog Melly Man',
         perc1: '22.5% ',
         bonus1: 'Damage Reduction',
-        brain: 'ou and nearby teammates gain 4% increased damage',
+        brain: 'You and nearby teammates gain 4% increased damage',
         fusedFams: '40 Melvin Chest',
         atk: '55.4%',
         hp: '31.7%',
@@ -6308,15 +6046,14 @@ const fusions = [
         tar5: closest2,
         dam5: '91-169%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'melvin',
     },
-    {
+    {   name: 'Ninjin',
         image: 'url("dist/imgs/ninjin.png")',
-        name: 'Ninjin',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
-        brain: 'amage increased by 25% to enemies below 25% health',
+        brain: 'Damage increased by 25% to enemies below 25% health',
         fusedFams: '40 Melvin Chest',
         atk: '38%',
         hp: '25.3%',
@@ -6337,15 +6074,14 @@ const fusions = [
         tar5: strongest,
         dam5: '351-429%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'melvin',
     },
-    {
+    {   name: 'Melborg',
         image: 'url("dist/imgs/melborg.png")',
-        name: 'Melborg',
         perc1: '22.5% ',
         bonus1: 'Damage',
-        brain: 'amage increased by 10% to enemies above 80% health or below 20% health',
+        brain: 'Damage increased by 10% to enemies above 80% health or below 20% health',
         fusedFams: '40 Melvin Chest',
         atk: '41.2%',
         hp: '20.6%',
@@ -6366,12 +6102,11 @@ const fusions = [
         tar5: weakest,
         dam5: '?-?%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'melvin',
     },
-    {
+    {   name: 'Mervlin',
         image: 'url("dist/imgs/mervlin.png")',
-        name: 'Mervlin',
         perc1: '11.25% ',
         bonus1: 'Empower Chance',
         perc2: '11.25% ',
@@ -6397,12 +6132,11 @@ const fusions = [
         tar5: strongest,
         dam5: '?-?%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'melvin',
     },
-    {
+    {   name: 'GlarzDos',
         image: 'url("dist/imgs/glarzdos.png")',
-        name: 'GlarzDos',
         perc1: '25% ',
         bonus1: 'Damage Reduction',
         perc2: '2.5% ',
@@ -6427,12 +6161,11 @@ const fusions = [
         tar5: tarHeal,
         dam5: '61.5-102.5%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'Z5D3, exterm',
     },
-    {
+    {   name: 'Quorg',
         image: 'url("dist/imgs/quorg.png")',
-        name: 'Quorg',
         perc1: '22% ',
         bonus1: 'Dual Strike',
         perc2: '2% ',
@@ -6457,12 +6190,11 @@ const fusions = [
         tar5: resurrect,
         dam5: '40-60%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'Z3D3, exterm',
     },
-    {
+    {   name: 'KAL 9000',
         image: 'url("dist/imgs/kal 9000.png")',
-        name: 'KAL 9000',
         perc1: '25% ',
         bonus1: 'Empower Chance',
         perc2: '5% ',
@@ -6487,12 +6219,11 @@ const fusions = [
         tar5: targetSelf,
         dam5: '108-252% (10.8-25.2%)',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'R2, exterm',
     },
-    {
+    {   name: 'TermBOT 9000',
         image: 'url("dist/imgs/termbot 9000.png")',
-        name: 'TermBOT 9000',
         perc1: '28% ',
         bonus1: 'Damage Reduction',
         perc2: '1% ',
@@ -6517,16 +6248,15 @@ const fusions = [
         tar5: random,
         dam5: '156-364%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'R2, exterm',
     },
-    {
+    {   name: 'Thezeron',
         image: 'url("dist/imgs/thezeron.png")',
-        name: 'Thezeron',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         perc2: '1% ',
-        bonus2: 'Quad Strike[10]',
+        bonus2: 'Quad Strike',
         fusedFams: 'Dullag + Woberleng + 15 Scarlag Skin',
         atk: '24.5%',
         hp: '36%',
@@ -6547,12 +6277,11 @@ const fusions = [
         tar5: target,
         dam5: '144-216%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'brimstone',
     },
-    {
+    {   name: 'Chedzun Aiki',
         image: 'url("dist/imgs/chedzun aiki.png")',
-        name: 'Chedzun Aiki',
         perc1: '30% ',
         bonus1: 'Dual Strike',
         perc2: '1% ',
@@ -6577,12 +6306,11 @@ const fusions = [
         tar5: drainTarget,
         dam5: '45-135%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'brimstone',
     },
-    {
+    {   name: 'Gyushido',
         image: 'url("dist/imgs/gyushido.png")',
-        name: 'Gyushido',
         perc1: '27.5% ',
         bonus1: 'Damage Reduction',
         perc2: '2.5% ',
@@ -6607,12 +6335,11 @@ const fusions = [
         tar5: all,
         dam5: '72-88%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'brimstone',
     },
-    {
+    {   name: 'Demeter',
         image: 'url("dist/imgs/demeter.png")',
-        name: 'Demeter',
         eleDmg: 'Water ',
         perc1: '18% ',
         bonus1: 'Deflect Chance',
@@ -6638,12 +6365,11 @@ const fusions = [
         tar5: randomx5,
         dam5: '48.75-81.25%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'titan',
     },
-    {
+    {   name: 'Porhius',
         image: 'url("dist/imgs/porhius.png")',
-        name: 'Porhius',
         eleDmg: 'Water ',
         perc1: '60% ',
         bonus1: 'Crit Chance',
@@ -6669,12 +6395,11 @@ const fusions = [
         tar5: targetx3,
         dam5: '54-66%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'titan',
     },
-    {
+    {   name: 'Krakon',
         image: 'url("dist/imgs/krakon.png")',
-        name: 'Krakon',
         eleDmg: 'Water ',
         perc1: '30% ',
         bonus1: 'Dual Strike',
@@ -6700,15 +6425,14 @@ const fusions = [
         tar5: selfShield,
         dam5: '135-165%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'titan',
     },
     //#endregion
 
-    //#region //------------- LEGENDARY INVASION -------------//
-    {
+    //#region //------------- LEGENDARY INVASION -------------//√
+    {   name: 'Zagno',
         image: 'url("dist/imgs/zagno.png")',
-        name: 'Zagno',
         perc1: '15% ',
         bonus1: 'Life Steal',
         perc2: '15% ',
@@ -6733,12 +6457,11 @@ const fusions = [
         tar5: closest2,
         dam5: '121.5-202.5%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R1, zombo',
     },
-    {
+    {   name: 'Bluz',
         image: 'url("dist/imgs/bluz.png")',
-        name: 'Bluz',
         perc1: '15% ',
         bonus1: 'Evade Chance',
         perc2: '9% ',
@@ -6763,12 +6486,11 @@ const fusions = [
         tar5: closest,
         dam5: '201-373%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z2D2, zombo',
     },
-    {
+    {   name: 'Lardoz',
         image: 'url("dist/imgs/lardoz.png")',
-        name: 'Lardoz',
         perc1: '15% ',
         bonus1: 'Empower Chance',
         perc2: '15% ',
@@ -6793,12 +6515,11 @@ const fusions = [
         tar5: spreadHeal,
         dam5: '84-156%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'zombo',
     },
-    {
+    {   name: 'Yenji',
         image: 'url("dist/imgs/yenji.png")',
-        name: 'Yenji',
         perc1: '15% ',
         bonus1: 'Evade Chance',
         perc2: '9% ',
@@ -6823,12 +6544,11 @@ const fusions = [
         tar5: target,
         dam5: '180-270%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z2D1, ninja',
     },
-    {
+    {   name: 'Drya',
         image: 'url("dist/imgs/drya.png")',
-        name: 'Drya',
         perc1: '30% ',
         bonus1: 'Damage Reduction',
         fusedFams: '5 Dryad + 150 Ninja Powah',
@@ -6851,12 +6571,11 @@ const fusions = [
         tar5: weakest,
         dam5: '114-266%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z1D2, ninja',
     },
-    {
+    {   name: 'The Master',
         image: 'url("dist/imgs/the master.png")',
-        name: 'The Master',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         fusedFams: 'Penja + Nubbo + Bruja',
@@ -6879,12 +6598,11 @@ const fusions = [
         tar5: target,
         dam5: '108-252%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'ninja',
     },
-    {
+    {   name: 'Kringle',
         image: 'url("dist/imgs/kringle.png")',
-        name: 'Kringle',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         perc2: '15% ',
@@ -6909,12 +6627,11 @@ const fusions = [
         tar5: all,
         dam5: '48-112%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z4D3, holiday',
     },
-    {
+    {   name: 'Rudolffin',
         image: 'url("dist/imgs/rudolffin.png")',
-        name: 'Rudolffin',
         perc1: '30% ',
         bonus1: 'Speed',
         fusedFams: '5 Driffin + 150 Ginger Snaps',
@@ -6937,12 +6654,11 @@ const fusions = [
         tar5: closest,
         dam5: '160.3-297.7%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R2, holiday',
     },
-    {
+    {   name: 'Scrooge',
         image: 'url("dist/imgs/scrooge.png")',
-        name: 'Scrooge',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         perc2: '15% ',
@@ -6967,12 +6683,11 @@ const fusions = [
         tar5: random,
         dam5: '130-390%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R3, holiday',
     },
-    {
+    {   name: 'X-M4S',
         image: 'url("dist/imgs/x-m4s.png")',
-        name: 'X-M4S',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         fusedFams: '5 RoboMax - 6000 + 150 Ginger Snaps',
@@ -6995,12 +6710,11 @@ const fusions = [
         tar5: target,
         dam5: '126-234%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R4, holiday',
     },
-    {
+    {   name: 'Gingermic',
         image: 'url("dist/imgs/gingermic.png")',
-        name: 'Gingermic',
         perc1: '15% ',
         bonus1: 'Damage',
         perc2: '15% ',
@@ -7025,12 +6739,11 @@ const fusions = [
         tar5: all,
         dam5: '40-120%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R2, holiday',
     },
-    {
+    {   name: 'Gello',
         image: 'url("dist/imgs/gello.png")',
-        name: 'Gello',
         perc1: '18% ',
         bonus1: 'Deflect Chance',
         fusedFams: '5 Gemm + 150 Jelly Donut',
@@ -7053,12 +6766,11 @@ const fusions = [
         tar5: all,
         dam5: '64-96%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z2D3, jelly',
     },
-    {
+    {   name: 'Jellie',
         image: 'url("dist/imgs/jellie.png")',
-        name: 'Jellie',
         perc1: '15% ',
         bonus1: 'Absorb Chance',
         fusedFams: 'Bully + 150 Jelly Donut',
@@ -7081,12 +6793,11 @@ const fusions = [
         tar5: furthest,
         dam5: '126-294%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R3, jelly',
     },
-    {
+    {   name: 'Jelvins',
         image: 'url("dist/imgs/jelvins.png")',
-        name: 'Jelvins',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         fusedFams: '5 Gelvins + 150 Jelly Donut',
@@ -7109,12 +6820,11 @@ const fusions = [
         tar5: weakest,
         dam5: '114-266%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R5, jelly',
     },
-    {
+    {   name: 'Xentho',
         image: 'url("dist/imgs/xentho.png")',
-        name: 'Xentho',
         perc1: '30% ',
         bonus1: 'Dual Strike',
         fusedFams: '5 Xanthin + 150 Jelly Donut',
@@ -7137,12 +6847,11 @@ const fusions = [
         tar5: random,
         dam5: '208-312%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R5, jelly',
     },
-    {
+    {   name: 'Croundy',
         image: 'url("dist/imgs/croundy.png")',
-        name: 'Croundy',
         perc1: '30% ',
         bonus1: 'Damage Reduction',
         fusedFams: '5 Crum + 150 Croutons',
@@ -7165,12 +6874,11 @@ const fusions = [
         tar5: furthest,
         dam5: '126-294%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R6, papoz',
     },
-    {
+    {   name: 'Svireal',
         image: 'url("dist/imgs/svireal.png")',
-        name: 'Svireal',
         perc1: '15% ',
         bonus1: 'Empower Chance',
         perc2: '15% ',
@@ -7195,12 +6903,11 @@ const fusions = [
         tar5: furthestSelf,
         dam5: '189-441% (19.2-44.8%)',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R5, papoz',
     },
-    {
+    {   name: 'Chefoz',
         image: 'url("dist/imgs/chefoz.png")',
-        name: 'Chefoz',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         fusedFams: "Elote + Findellow + Melv'cone",
@@ -7223,12 +6930,11 @@ const fusions = [
         tar5: spreadHeal,
         dam5: '84-156%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'papoz',
     },
-    {
+    {   name: 'Lord Daspinor',
         image: 'url("dist/imgs/lord daspinor.png")',
-        name: 'Lord Daspinor',
         perc1: '22.5% ',
         bonus1: 'Dual Strike',
         perc2: '2% ',
@@ -7253,12 +6959,11 @@ const fusions = [
         tar5: strongestx2,
         dam5: '97.5-162.5%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'Z1D3, turkey',
     },
-    {
+    {   name: 'Ronemax 600',
         image: 'url("dist/imgs/ronemax 600.png")',
-        name: 'Ronemax 600',
         perc1: '60% ',
         bonus1: 'Block Chance',
         fusedFams: '5 RoboMax - 6000 + 150 Feastum',
@@ -7281,12 +6986,11 @@ const fusions = [
         tar5: drainAll,
         dam5: '36-44%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'R4, turkey',
     },
-    {
+    {   name: 'Dagdanos',
         image: 'url("dist/imgs/dagdanos.png")',
-        name: 'Dagdanos',
         perc1: '40% ',
         bonus1: 'Crit Chance',
         perc2: '7.5% ',
@@ -7311,15 +7015,14 @@ const fusions = [
         tar5: all,
         dam5: '72-88%',
         rarity: 'legendary',
-        source: '',
-        specSource: '',
+        source: 'invasion',
+        specSource: 'turkey',
     },
     //#endregion
 
     //#region //------------- LEGENDARY EXPEDITION -------------//
-    {
+    {   name: 'Gobbon',
         image: 'url("dist/imgs/gobbon.png")',
-        name: 'Gobbon',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         brain: '0% chance to attack weakest enemy for 43.2-64.8% per turn',
@@ -7346,9 +7049,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Raleib',
         image: 'url("dist/imgs/raleib.png")',
-        name: 'Raleib',
         perc1: '30% ',
         bonus1: 'Speed',
         brain: '0% chance to attack weakest enemy for 43.2-64.8% per turn',
@@ -7375,9 +7077,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Ghosbooboo',
         image: 'url("dist/imgs/ghosbooboo.png")',
-        name: 'Ghosbooboo',
         perc1: '30% ',
         bonus1: 'Damage Reduction',
         brain: '0% chance to spread shield for 35.2-52.8% when you get hit',
@@ -7404,9 +7105,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Blemo',
         image: 'url("dist/imgs/blemo.png")',
-        name: 'Blemo',
         perc1: '30% ',
         bonus1: 'Damage',
         brain: '0% chance to spread heal for 38.4-57.6% when you hit an enemy',
@@ -7433,9 +7133,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Fati',
         image: 'url("dist/imgs/fati.png")',
-        name: 'Fati',
         perc1: '18% ',
         bonus1: 'Deflect Chance',
         brain: '0% chance to attack weakest enemy for 43.2-64.8% when you get hit',
@@ -7462,9 +7161,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gummy',
         image: 'url("dist/imgs/gummy.png")',
-        name: 'Gummy',
         perc1: '15% ',
         bonus1: 'Absorb Chance',
         brain: '0% chance to spread shield for 35.2-52.8% when you get hit',
@@ -7491,9 +7189,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Yemic',
         image: 'url("dist/imgs/yemic.png")',
-        name: 'Yemic',
         perc1: '30% ',
         bonus1: 'Damage Reduction',
         brain: '0% chance to spread heal for 38.4-57.6% when you get hit',
@@ -7520,9 +7217,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Dryonic',
         image: 'url("dist/imgs/dryonic.png")',
-        name: 'Dryonic',
         perc1: '30% ',
         bonus1: 'Dual Strike',
         brain: '0% chance to attack weakest enemy for 43.2-64.8% when you hit an enemy',
@@ -7549,9 +7245,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Jebediah',
         image: 'url("dist/imgs/jebediah.png")',
-        name: 'Jebediah',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         brain: '0% chance to spread heal for 35.2-52.8% per turn [11]',
@@ -7578,9 +7273,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Clodius',
         image: 'url("dist/imgs/clodius.png")',
-        name: 'Clodius',
         perc1: '30% ',
         bonus1: 'Dual Strike',
         brain: '0% chance to spread shield for 35.2-52.8% when you hit an enemy',
@@ -7607,9 +7301,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Googarum',
         image: 'url("dist/imgs/googarum.png")',
-        name: 'Googarum',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         brain: '0% chance to spread shield for 35.2-52.8% when you hit an enemy',
@@ -7636,9 +7329,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Svord',
         image: 'url("dist/imgs/svord.png")',
-        name: 'Svord',
         perc1: '60% ',
         bonus1: 'Block Chance',
         brain: '0% chance to heal team for 19.2-28.8% when you get hit',
@@ -7665,9 +7357,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Sproutlings',
         image: 'url("dist/imgs/sproutlings.png")',
-        name: 'Sproutlings',
         perc1: '15% ',
         bonus1: 'Absorb Chance',
         brain: '0% chance to attack weakest enemy for 43.2-64.8% when you get hit',
@@ -7694,9 +7385,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gwelvons',
         image: 'url("dist/imgs/gwelvons.png")',
-        name: 'Gwelvons',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         brain: '0% chance to spread shield for 35.2-52.8% per turn',
@@ -7723,9 +7413,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Twimbo',
         image: 'url("dist/imgs/twimbo.png")',
-        name: 'Twimbo',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         brain: '0% chance to attack weakest enemy for 43.2-64.8% when you hit an enemy',
@@ -7752,9 +7441,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gamby',
         image: 'url("dist/imgs/gamby.png")',
-        name: 'Gamby',
         perc1: '30% ',
         bonus1: 'Dual Strike',
         brain: '0% chance to spread shield for 35.2-52.8% per turn',
@@ -7781,9 +7469,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Tubb-005',
         image: 'url("dist/imgs/tubb-005.png")',
-        name: 'Tubb-005',
         perc1: '30% ',
         bonus1: 'Damage Reduction',
         brain: '0% chance to shield team for 16-24% when you get hit',
@@ -7810,9 +7497,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Blumby',
         image: 'url("dist/imgs/blumby.png")',
-        name: 'Blumby',
         perc1: '30% ',
         bonus1: 'Damage',
         brain: '0% chance to attack random enemy for 60.8-91.2% when you hit an enemy',
@@ -7839,9 +7525,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Yackerz',
         image: 'url("dist/imgs/yackerz.png")',
-        name: 'Yackerz',
         perc1: '15% ',
         bonus1: 'Damage Reduction',
         perc2: '7.5% ',
@@ -7870,9 +7555,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Nosstorvo',
         image: 'url("dist/imgs/nosstorvo.png")',
-        name: 'Nosstorvo',
         perc1: '18% ',
         bonus1: 'Deflect Chance',
         brain: '0% chance to spread shield for 35.2-52.8% when you get hit',
@@ -7899,9 +7583,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Blimb',
         image: 'url("dist/imgs/blimb.png")',
-        name: 'Blimb',
         perc1: '300% ',
         bonus1: 'Crit Damage',
         brain: '0% chance to spread heal and spread shield for 38.4-57.6% when you hit an enemy',
@@ -7928,9 +7611,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Vionot',
         image: 'url("dist/imgs/vionot.png")',
-        name: 'Vionot',
         perc1: '9% ',
         bonus1: 'Deflect Chance',
         perc2: '7.5% ',
@@ -7959,9 +7641,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gobbex',
         image: 'url("dist/imgs/gobbex.png")',
-        name: 'Gobbex',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         brain: '0% chance to spread heal for 38.4-57.6% per turn',
@@ -7988,9 +7669,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gemor',
         image: 'url("dist/imgs/gemor.png")',
-        name: 'Gemor',
         perc1: '60% ',
         bonus1: 'Block Chance',
         brain: '0% chance to spread heal for 38.4-57.6% when you get hit',
@@ -8017,9 +7697,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Blublix',
         image: 'url("dist/imgs/blublix.png")',
-        name: 'Blublix',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         brain: '0% chance to attack random enemy for 60.8-91.2% when you hit an enemy',
@@ -8046,9 +7725,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Drafgin',
         image: 'url("dist/imgs/drafgin.png")',
-        name: 'Drafgin',
         perc1: '30% ',
         bonus1: 'Dual Strike',
         brain: '0% chance to attack weakest enemy for 43.2-64.8% when you hit an enemy',
@@ -8075,9 +7753,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Mowhi',
         image: 'url("dist/imgs/mowhi.png")',
-        name: 'Mowhi',
         perc1: '30% ',
         bonus1: 'Damage',
         brain: '0% chance to attack weakest enemy for 43.2-64.8% when you hit an enemy',
@@ -8104,9 +7781,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Wizbot',
         image: 'url("dist/imgs/wizbot.png")',
-        name: 'Wizbot',
         perc1: '15% ',
         bonus1: 'Dual Strike',
         perc2: '15% ',
@@ -8135,9 +7811,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Capt. Gladbeard',
         image: 'url("dist/imgs/capt. gladbeard.png")',
-        name: 'Capt. Gladbeard',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         
@@ -8166,9 +7841,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Gobelros',
         image: 'url("dist/imgs/gobelros.png")',
-        name: 'Gobelros',
         perc1: '15% ',
         bonus1: 'Crit Chance',
         perc2: '30% ',
@@ -8197,9 +7871,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Oeviss',
         image: 'url("dist/imgs/oeviss.png")',
-        name: 'Oeviss',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         perc2: '17.5% ',
@@ -8228,9 +7901,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'B-75',
         image: 'url("dist/imgs/b-75.png")',
-        name: 'B-75',
         perc1: '27.5% ',
         bonus1: 'Damage Reduction',
         perc2: '1.25% ',
@@ -8259,9 +7931,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Vomon',
         image: 'url("dist/imgs/vomon.png")',
-        name: 'Vomon',
         perc1: '15% ',
         bonus1: 'Deflect Chance',
         perc2: '15% ',
@@ -8290,9 +7961,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Bonbonk',
         image: 'url("dist/imgs/bonbonk.png")',
-        name: 'Bonbonk',
         perc1: '56% ',
         bonus1: 'Block Chance',
         perc2: '2% ',
@@ -8321,9 +7991,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Sonord',
         image: 'url("dist/imgs/sonord.png")',
-        name: 'Sonord',
         perc1: '25% ',
         bonus1: 'Damage Reduction',
         perc2: '10% ',
@@ -8352,9 +8021,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Drelvy',
         image: 'url("dist/imgs/drelvy.png")',
-        name: 'Drelvy',
         perc1: '30% ',
         bonus1: 'Evade Chance',
         
@@ -8383,9 +8051,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Quirn',
         image: 'url("dist/imgs/quirn.png")',
-        name: 'Quirn',
         perc1: '22.5% ',
         bonus1: 'Crit Chance',
         perc2: '22.5% ',
@@ -8417,9 +8084,8 @@ const fusions = [
     //#endregion
 
     //#region //------------- MYTHIC DUNGEON -------------//
-    {
+    {   name: 'Rombolio',
         image: 'url("dist/imgs/rombolio.png")',
-        name: 'Rombolio',
         perc1: '30% ',
         bonus1: 'Evade Chance',
         perc2: '15% ',
@@ -8449,9 +8115,8 @@ const fusions = [
         rarity: 'mythic',
         source: 'dungeon',
     },
-    {
+    {   name: 'Walogdr',
         image: 'url("dist/imgs/walogdr.png")',
-        name: 'Walogdr',
         perc1: '30% ',
         bonus1: 'Empower Chance',
         perc2: '0.5% ',
@@ -8483,9 +8148,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Stratos',
         image: 'url("dist/imgs/stratos.png")',
-        name: 'Stratos',
         perc1: '15% ',
         bonus1: 'Damage Reduction',
         perc2: '7.5% ',
@@ -8517,9 +8181,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Phorbon',
         image: 'url("dist/imgs/phorbon.png")',
-        name: 'Phorbon',
         perc1: '15% ',
         bonus1: 'Absorb Chance',
         
@@ -8551,9 +8214,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Rigneous',
         image: 'url("dist/imgs/rigneous.png")',
-        name: 'Rigneous',
         perc1: '80% ',
         bonus1: 'Block Chance',
         
@@ -8585,9 +8247,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Frestir',
         image: 'url("dist/imgs/frestir.png")',
-        name: 'Frestir',
         eleDmg: 'Fire ',
         perc1: '10% ',
         bonus1: 'Dmg',
@@ -8622,15 +8283,13 @@ const fusions = [
     },
     //#endregion
 
-    //#region //---------------- MYTHIC WB ----------------//
-    {
+    //#region //---------------- MYTHIC WB ----------------//√
+    {   name: 'Drenath',
         image: 'url("dist/imgs/drenath.png")',
-        name: 'Drenath',
         perc1: '60% ',
         bonus1: 'Crit Chance',
         perc2: '3% ',
         bonus2: 'Team Enrage',
-        
         fusedFams: 'Ragmar + Drazig + Rarzok',
         atk: '41.7%',
         hp: '20%',
@@ -8654,12 +8313,11 @@ const fusions = [
         tar6: spreadHeal,
         dam6: '72-168%',
         rarity: 'mythic',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'nether',
     },
-    {
+    {   name: 'Melvitron',
         image: 'url("dist/imgs/melvitron.png")',
-        name: 'Melvitron',
         perc1: '15% ',
         bonus1: 'Empower Chance',
         perc2: '15% ',
@@ -8688,17 +8346,15 @@ const fusions = [
         tar6: spreadHeal,
         dam6: '108-132%',
         rarity: 'mythic',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'melvin',
     },
-    {
+    {   name: 'K4L31D0',
         image: 'url("dist/imgs/k4l31d0.png")',
-        name: 'K4L31D0',
         perc1: '30% ',
         bonus1: 'Dual Strike',
         perc2: '1% ',
         bonus2: 'Quad Strike',
-        
         fusedFams: 'Kaleido + Kal 9000 + Termbot 9000',
         atk: '30%',
         hp: '21.7%',
@@ -8722,17 +8378,14 @@ const fusions = [
         tar6: resurrect,
         dam6: '18-42%',
         rarity: 'mythic',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'exterm',
     },
-    {
+    {   name: 'Ignatus Ra',
         image: 'url("dist/imgs/ignatus ra.png")',
-        name: 'Ignatus Ra',
         perc1: '60% ',
         bonus1: 'Block Chance',
-        perc2: 'Your team gains 3% ',
-        bonus2: 'increased damage',
-        
+        brain: 'Your team gains 3% increased damage',
         fusedFams: 'Gyushido + Chedzun Aiki + Thezeron',
         atk: '71.5%',
         hp: '17%',
@@ -8756,12 +8409,11 @@ const fusions = [
         tar6: drainAll,
         dam6: '25-75%',
         rarity: 'mythic',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'brimstone',
     },
-    {
+    {   name: 'Teithyus',
         image: 'url("dist/imgs/teithyus.png")',
-        name: 'Teithyus',
         eleDmg: 'Water ',
         perc1: '30% ',
         bonus1: 'Max Shields',
@@ -8791,20 +8443,18 @@ const fusions = [
         tar6: spreadShieldTeamHeal,
         dam6: '22.5-27.5%, 67.5-82.5%',
         rarity: 'mythic',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'titan, Z6D3',
     },
     //#endregion
 
-    //#region //------------- MYTHIC INVASION -------------//
-    {
+    //#region //------------- MYTHIC INVASION -------------//√
+    {   name: 'Turkon',
         image: 'url("dist/imgs/turkon.png")',
-        name: 'Turkon',
         perc1: '27% ',
         bonus1: 'Damage Reduction',
         perc2: '8% ',
         bonus2: 'Evade Chance',
-        
         fusedFams: '6 McSaday Mon',
         atk: '45%',
         hp: '45%',
@@ -8828,15 +8478,14 @@ const fusions = [
         tar6: closestx3,
         dam6: '85.5-104.5%',
         rarity: 'mythic',
-        source: '',
-        specSource: '',
+        source: 'worldboss',
+        specSource: 'turkey',
     },
     //#endregion
 
     //#region //------------- MYTHIC EXPEDITION -------------//
-    {
+    {   name: 'Zarlock',
         image: 'url("dist/imgs/zarlock.png")',
-        name: 'Zarlock',
         perc1: '30% ',
         bonus1: 'Damage Reduction',
         perc2: '5% ',
@@ -8868,9 +8517,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'X5-T34M',
         image: 'url("dist/imgs/x5-t34m.png")',
-        name: 'X5-T34M',
         perc1: '30% ',
         bonus1: 'Damage',
         perc2: '3% ',
@@ -8902,9 +8550,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Grampa Hef',
         image: 'url("dist/imgs/grampa hef.png")',
-        name: 'Grampa Hef',
         perc1: '60% ',
         bonus1: 'Block Chance',
         perc2: '3% ',
@@ -8936,9 +8583,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Astamus',
         image: 'url("dist/imgs/astamus.png")',
-        name: 'Astamus',
         perc1: '30% ',
         bonus1: 'Damage',
         perc2: '5% ',
@@ -8970,9 +8616,8 @@ const fusions = [
         source: '',
         specSource: '',
     },
-    {
+    {   name: 'Daking',
         image: 'url("dist/imgs/daking.png")',
-        name: 'Daking',
         perc1: '30% ',
         bonus1: 'Crit Chance',
         perc2: '30% ',
