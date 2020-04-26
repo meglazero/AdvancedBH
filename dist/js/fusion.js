@@ -1,71 +1,3 @@
-//#region damage/heal targets for individual attacks
-const closest = 'Damage closest';
-const closest2 = 'Damage closest 2';
-const closest3 = 'Damage closest 3';
-const closest4 = 'Damage closest 4';
-const closestx2 = 'Damage closest (x2)';
-const closestx3 = 'Damage closest (x3)';
-const closestx6 = 'Damage closest (x6)';
-const closestSelf = 'Damage closest & self';
-const closestShieldSelf = 'Damage closest & shield self';
-const closestShieldSpread = 'Damage closest & spread shield';
-const closestHealSelf = 'Damage closest & heal self';
-const target = 'Damage target';
-const targetx2 = 'Damage target (x2)';
-const targetx3 = 'Damage target (x3)';
-const furthest = 'Damage furthest';
-const furthestx2 = 'Damage furthest (x2)';
-const furthestx3 = 'Damage furthest (x3)';
-const furthestDmgDrain = 'Damage and drain furthest';
-const drainClose = 'Drain closest';
-const drainAll = 'Drain all';
-const drainTarget = 'Drain target';
-const drainWeakest = 'Drain weakest';
-const drainFurthest = 'Drain furthest';
-const drainRandom = 'Drain random';
-const weakest = 'Damage weakest';
-const weakestx2 = 'Damage weakest (x2)';
-const weakRan = 'Damage weakest & 1 random';
-const weakestShieldSelf = 'Damage closest & shield self';
-const strongest = 'Damage strongest';
-const strongestx2 = 'Damage strongest (x2)';
-const strongestDmgDrain = 'Damage and drain strongest';
-const strongestOnce = 'Damage strongest (usable once per adventure)';
-const all = 'Damage all';
-const tarHeal = 'Heal target';
-const spreadHeal = 'Spread heal';
-const selfHeal = 'Heal self';
-const teamHeal = 'Heal team';
-const weakestHeal = 'Heal weakest';
-const teamShieldHeal = 'Shield and heal team';
-const spreadShieldTeamHeal = 'Spread shield and heal team';
-const selfShield = 'Shield self';
-const teamShield = 'Shield team';
-const tarShield = 'Shield target';
-const spreadShield = 'Spread shield';
-const spreadShieldOnce = 'Spread shield (usable once per adventure)';
-const tarShieldSelf = 'Shield target & damage self';
-const random = 'Damage random';
-const randomx2 = 'Damage random (x2)';
-const randomx3 = 'Damage random (x3)';
-const randomx5 = 'Damage random (x5)';
-const randomAdditional = 'Damage random & 1 additional enemy';
-const randomAdditional4 = 'Damage random & 4 additional enemies';
-const furthestRandom2 = 'Damage furthest & 2 random enemies';
-const furthestRandom3 = 'Damage furthest & 3 random enemies';
-const tarRan = 'Damage target and random';
-const dmgDmgClosest = 'Damage and physical damage closest';
-const targetSelf = 'Damage target & self';
-const furthestSelf = 'Damage furthest & self';
-const weakestSelf = 'Damage weakest & self';
-const strongestSelf = 'Damage strongest & self';
-const teamHealDmgSelf = 'Heal team & damage self';
-const dmgAdditional2 = 'Damage & 2 additional enemies';
-const dmgDrainRandom = 'Damage & drain random enemy';
-const strongestSpreadHeal = 'Damage strongest & spread heal';
-const resurrect = 'Resurrect teammate (usable once per adventure)';
-//#endregion
-
 //sets up template and table to output information to from fusions objects
 const fusionTemplate = document.querySelector('#fusionTemplate');
 const fusionTable = document.querySelector('#fusions');
@@ -175,8 +107,6 @@ function genFusions(element) {
 
     const bonusStat = fusionElement.querySelector('#bonusStat');
 
-    //if fusion has more than 1 bonus stat display both with spacing, else display one
-
     //giant block of if else statements to work down if fusions have element, brain, and 4-1 bonus stats
     //and if those stats require being made elemental or not
     if(element.eleDmg != undefined && (
@@ -266,6 +196,7 @@ function genFusions(element) {
     const hpValue = fusionElement.querySelector('#hpValue');
     hpValue.textContent = element.hp;
 
+    //all targets are set up to apply elemental modifier to target text if target and eledmg apply
     const target1 = fusionElement.querySelector('#target1');
     if(element.eleDmg == undefined){
         target1.textContent = element.tar1;
@@ -396,15 +327,17 @@ function clearTable(){
     });
 };
 
+    //clears all checkmarks and if there was a search term resumes that search
 function clearChecks(){
-    if(searchBar.value != '' || bonusBar.value != ''){
-        clearTable();
-    }
     filterCheck.forEach(element => {
         element.checked = false;
     });
+    if(searchBar.value != '' || bonusSearch.value != ''){
+        search();
+    }
 };
 
+    //removes anything that isn't a-z 0-9 from value to ease searching
 function removeNonAlphanum(arr){
     const al = arr.length;
     var tf = true;
@@ -430,6 +363,63 @@ function removeNonAlphanum(arr){
     }
 };
 
+    //function for rarity checkboxes that searches for whatever is checked, displays search terms, or displays whole table
+function rarityCheck(){
+    if(commonSelector.checked || 
+        rareSelector.checked || 
+        epicSelector.checked || 
+        legendarySelector.checked || 
+        mythicSelector.checked){
+            search()
+    } else if(searchBar.value != '' || bonusSearch.value != ''){
+        search();
+    } else{
+        clearTable()
+    }
+}
+
+    //searches defined list of known bonuses, if any fusions have a bonus not on the list can be updated in array and on html
+function bonusCheck(i, a, b, c, d){
+    if(i == 4){
+        if(bonuses.includes(a) != true){
+            console.log(element.name + ': ' + a)
+        }
+        if(bonuses.includes(b) != true){
+            console.log(element.name + ': ' + b)
+        }
+        if(bonuses.includes(c) != true){
+            console.log(element.name + ': ' + c)
+        }
+        if(bonuses.includes(d) != true){
+            console.log(element.name + ': ' + d)
+        }
+    }
+    if(i == 3){
+        if(bonuses.includes(a) != true){
+            console.log(element.name + ': ' + a)
+        }
+        if(bonuses.includes(b) != true){
+            console.log(element.name + ': ' + b)
+        }
+        if(bonuses.includes(c) != true){
+            console.log(element.name + ': ' + c)
+        }
+    }
+    if(i == 2){
+        if(bonuses.includes(a) != true){
+            console.log(element.name + ': ' + a)
+        }
+        if(bonuses.includes(b) != true){
+            console.log(element.name + ': ' + b)
+        }
+    }
+    if(i == 1){
+        if(bonuses.includes(a) != true){
+            console.log(element.name + ': ' + a)
+        }
+    }
+}
+
     //pulls name or bonus stat info from #search, then looks for
     //#searchbar info in column depending on #search setting, clear tables and
     //update with only familiars that match
@@ -448,10 +438,7 @@ function search(){
     }
     //if there is a value entered in searchbar
     if(searchBar.value != '' || bonusSearch.value != ''){
-        // console.log(searchBar.value)
-        // console.log(bonusSearch.value)
-        // console.log(bonusSearch)
-        // console.log(searchBar)
+
         //if mode selector is bonus
         if(searchMode.value == 'bonus'){
             //check each fusion
@@ -463,19 +450,7 @@ function search(){
                     const b2 = element.bonus2.toLowerCase();
                     const b3 = element.bonus3.toLowerCase();
                     const b4 = element.bonus4.toLowerCase();
-
-                    if(bonuses.includes(b1) != true){
-                        console.log(element.name + ': ' + b1);
-                    };
-                    if(bonuses.includes(b2) != true){
-                        console.log(element.name + ': ' + b2);
-                    };
-                    if(bonuses.includes(b3) != true){
-                        console.log(element.name + ': ' + b3);
-                    };
-                    if(bonuses.includes(b4) != true){
-                        console.log(element.name + ': ' + b4);
-                    };
+                    bonusCheck(4, b1, b2, b3, b4);
 
                     if(raritySearch == false){
                         //if the searchbar is equal to either bonusstat
@@ -494,16 +469,7 @@ function search(){
                     const b1 = element.bonus1.toLowerCase();
                     const b2 = element.bonus2.toLowerCase();
                     const b3 = element.bonus3.toLowerCase();
-
-                    if(bonuses.includes(b1) != true){
-                        console.log(element.name + ': ' + b1);
-                    };
-                    if(bonuses.includes(b2) != true){
-                        console.log(element.name + ': ' + b2);
-                    };
-                    if(bonuses.includes(b3) != true){
-                        console.log(element.name + ': ' + b3);
-                    };
+                    bonusCheck(3, b1, b2, b3);
 
                     if(raritySearch == false){
                         //if the searchbar is equal to either bonusstat
@@ -521,13 +487,7 @@ function search(){
                 } else if(element.bonus2 != undefined){
                     const b1 = element.bonus1.toLowerCase();
                     const b2 = element.bonus2.toLowerCase();
-
-                    if(bonuses.includes(b1) != true){
-                        console.log(element.name + ': ' + b1);
-                    };
-                    if(bonuses.includes(b2) != true){
-                        console.log(element.name + ': ' + b2);
-                    };
+                    bonusCheck(2, b1, b2);
 
                     if(raritySearch == false){
                         //if the searchbar is equal to either bonusstat
@@ -544,10 +504,7 @@ function search(){
                         }
                 } else {
                 const b1 = element.bonus1.toLowerCase();
-
-                if(bonuses.includes(b1) != true){
-                    console.log(element.name + ': ' + b1);
-                };
+                bonusCheck(1, b1)
 
                 if(raritySearch == false){
                     //if the searchbar is equal to either bonusstat
