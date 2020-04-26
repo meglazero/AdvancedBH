@@ -5,7 +5,6 @@ const fusionTable = document.querySelector('#fusions');
 //set search variables
 const searchMode = document.querySelector('#search');
 const searchBar = document.querySelector('#searchbar');
-const bonusBar = document.querySelector('.searchbar');
 const bonusBox = document.querySelector('.bonus');
 const bonusSearch = document.querySelector('#bonusSearch');
 const commonSelector = document.querySelector('#commonCheck');
